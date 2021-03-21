@@ -1,0 +1,16 @@
+\section{Simulation}
+\label{sec:simulation}
+To make this simulation, we listed all components that make up the circuit. However, when declaring a current controlled voltage source ($V_c$, dependent on $I_c$), we need to find a way to access this current. For this, we need a voltage source where there isn't one which would sense the current $I_c$. Therefore, we created a fictitious one. This new source has voltage 0V and its sole purpose is to sense $I_c$, so it is in series with both resistors 6 and 7, between them (so their current should be the same). This makes node 6 connect $R_6$ to the positive terminal of this new source and create a new node that connects its negative terminal to $R_7$ (node 7). This makes the previous node 7 (that connects $R_7$ to $I_d$ and $V_c$) be called node 8.
+In Table ~\ref{tab:op}, we can see the operating point analysis results from the \textit{ngspice} simulation. g1[i] corresponds to the current $I_b$; i1 is $I_d$ and the voltages correspond to each node. As we can see the values obtained through this analysis are exactly the same as the ones derived from theoretical analysis.
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|l|r|}
+    \hline    
+    {\bf Name} & {\bf Value [A or V]} \\ \hline
+    \input{op_tab}
+  \end{tabular}
+  \caption{Operating point. A variable preceded by @ is of type {\em current}
+    and expressed in Ampere; other variables are of type {\it voltage} and expressed in
+    Volt.}
+  \label{tab:op}
+\end{table}
