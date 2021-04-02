@@ -22,8 +22,8 @@ printf("\n\n \\subsection{Nodal Analysis}\n");
 syms V1 V2 V3 V5 V6 V7 V8;
 N1= V1==Vs;
 N2= (V2-V1)/R1 + (V2-V3)/R2 + (V2-V5)/R3==0;
-N3= V5/R4 + (V5-V6)/R5 + (V8-V7)/R7 + (V5-V2)/R3==0;
-N5= V2 - V5 == (V3- V2)/(R2*Kb);
+N3= V2 - V5 == (V3- V2)/(R2*Kb);
+N5= V5/R4 + (V5-V6)/R5 + (V8-V7)/R7 + (V5-V2)/R3==0;
 N6= (V3-V2)/R2==(V5-V6)/R5;
 N7= V7==R6*((V8-V7)/R7);
 N8= Kd*((V7-V8)/R7)==V5-V8;
@@ -36,25 +36,16 @@ V5 = vpa(ns.V5)
 V6 = vpa(ns.V6)
 V7 = vpa(ns.V7)
 V8 = vpa(ns.V8)
-  
-syms I1 I2 I3;
-M1=(R4+R3+R1)*I1-R3*I2-R4*I3==-Vs;
-M2=-I1*Kb*R3+I2*(Kb*R3-1)==0;
-M3=-I1*R4+I3*(R4+R6+R7-Kd)==0;
-ms= solve(M1,M2,M3,[I1 I2 I3]);
-I1 = double(ms.I1)
-I2 = double(ms.I2)
-I3 = double(ms.I3)
-
+ 
 Vx=V6-V8
   
-syms V1x V2x V3x V5x V6x V7x V8x;
-N2x= (V2x)/R1 + (V2x-V3x)/R2 + (V2x-V5x)/R3==0;
-N3x= V2x - V5x == (V3x- V2x)/(R2*Kb);
-N5x= V5x/R4 + (V3x-V2x)/R2 + (V8x-V7x)/R7 + (V5x-V2x)/R3==0;
+syms V2x V3x V5x V6x V7x V8x;
+N2x= (V2x)/R1 + (V2x - V3x)/R2 + (V2x - V5x)/R3==0;
+N3x= V2x - V5x == (V3x - V2x)/(R2*Kb);
+N5x= V5x/R4 + (V3x - V2x)/R2 + (V8x - V7x)/R7 + (V5x - V2x)/R3==0;
 N6x= V6x-V8x==Vx;
-N7x= V7x==R6*((V8x-V7x)/R7);
-N8x= Kd*((V7x-V8x)/R7)==V5x-V8x;
+N7x= V7x==R6*((V8x - V7x)/R7);
+N8x= Kd*((V7x - V8x)/R7)==V5x - V8x;
 ns= solve(N2x,N3x,N5x,N6x,N7x,N8x, [V2x V3x V5x V6x V7x V8x]);
 
 V2x = vpa(ns.V2x)
@@ -63,3 +54,42 @@ V5x = vpa(ns.V5x)
 V6x = vpa(ns.V6x)
 V7x = vpa(ns.V7x)
 V8x = vpa(ns.V8x)
+
+Ix=-V6x/R5
+Req=-Vx/Ix
+Tau=Req*C/1000
+
+printf("\n\nNatural solution:\n");
+
+A=double(Vx)
+%time axis: 0 to 20ms with 2us steps
+t=0:2e-6:20e-03; %s
+TC=double(Tau)
+v6=A*exp(-t/TC)
+
+hf = figure ();
+plot (t*1000, v6);
+
+xlabel ("t[ms]");
+ylabel ("v6n(t) [V]");
+print (hf, "natural.eps", "-depsc");
+
+Zc=sym('1/(2*pi*1000*C*i)');
+syms V1p V2p V3p V5p V6p V7p V8p;
+N1p= V1p==1;
+N2p= (V2p-V1p)/R1 + (V2p-V3p)/R2 + (V2p-V5p)/R3==0;
+N3p= V2p - V5p == (V3p- V2p)/(R2*Kb);
+N5p= V5p/R4 + (V5p-V6p)/R5 + (V8p-V7p)/R7 + (V8p-V6p)/Zc + (V5p-V2p)/R3==0;
+N6p= (V8p-V6p)/Zc + (V5p-V6p)/R5==(V3p-V2p)/R2;
+N7p= V7p==R6*((V8p-V7p)/R7);
+N8p= Kd*((V7p-V8p)/R7)==V5p-V8p;
+ns= solve(N1p,N2p,N3p,N5p,N6p,N7p,N8p, [V1p V2p V3p V5p V6p V7p V8p]);
+
+       
+V1p = vpa(ns.V1p)
+V2p = vpa(ns.V2p)
+V3p = vpa(ns.V3p)
+V5p = vpa(ns.V5p)
+V6p = vpa(ns.V6p)
+V7p = vpa(ns.V7p)
+V8p = vpa(ns.V8p)
