@@ -65,27 +65,26 @@ A=double(Vx)
 %time axis: 0 to 20ms with 2us steps
 t=0:2e-6:20e-03; %s
 TC=double(Tau)
-v6=A*exp(-t/TC)
+v6=A*exp(-t/TC);
 
 hf = figure ();
-plot (t*1000, v6);
+plot (t*1000, v6, "r");
 
 xlabel ("t[ms]");
 ylabel ("v6n(t) [V]");
 print (hf, "natural.eps", "-depsc");
 
-Zc=sym('1/(2*pi*1000*C*i)');
+zc=1/(2*pi*1000*C*i)
 syms V1p V2p V3p V5p V6p V7p V8p;
 N1p= V1p==1;
 N2p= (V2p-V1p)/R1 + (V2p-V3p)/R2 + (V2p-V5p)/R3==0;
 N3p= V2p - V5p == (V3p- V2p)/(R2*Kb);
-N5p= V5p/R4 + (V5p-V6p)/R5 + (V8p-V7p)/R7 + (V8p-V6p)/Zc + (V5p-V2p)/R3==0;
-N6p= (V8p-V6p)/Zc + (V5p-V6p)/R5==(V3p-V2p)/R2;
+N5p= V5p/R4 + (V5p-V6p)/R5 + (V8p-V7p)/R7 + (V8p-V6p)/zc + (V5p-V2p)/R3==0;
+N6p= (V8p-V6p)/zc + (V5p-V6p)/R5==(V3p-V2p)/R2;
 N7p= V7p==R6*((V8p-V7p)/R7);
 N8p= Kd*((V7p-V8p)/R7)==V5p-V8p;
 ns= solve(N1p,N2p,N3p,N5p,N6p,N7p,N8p, [V1p V2p V3p V5p V6p V7p V8p]);
-
-       
+  
 V1p = vpa(ns.V1p)
 V2p = vpa(ns.V2p)
 V3p = vpa(ns.V3p)
@@ -93,3 +92,33 @@ V5p = vpa(ns.V5p)
 V6p = vpa(ns.V6p)
 V7p = vpa(ns.V7p)
 V8p = vpa(ns.V8p)
+
+V6r=-0.57979607293241249067088011934093;
+V6im=- 0.000081810508973260330098219669037616;
+
+w=2*pi*1000;
+v6f=V6r*cos(-w*t)-V6im*sin(-w*t);
+
+hff = figure ();
+plot (t*1000, v6f, "b");
+
+xlabel ("t[ms]");
+ylabel ("v6f(t) [V]");
+print (hff, "forced.eps", "-depsc");
+
+v6t=V6r*cos(-w*t)-V6im*sin(-w*t)+A*exp(-t/TC);
+hfff = figure ();
+hold on;
+plot ([-5,0], [double(V6), double(V6)], "r");
+plot ([0,0], [double(V6), double(Vx)], "r");
+plot (t*1000, v6t, "r");
+plot (t*1000, v6f, "b");
+plot (t*1000, v6, "g");
+hold off;
+xlabel ("t[ms]");
+ylabel ("v6(t) [V]");
+axis ([-5 20 -1.5 10]) 
+legend( 'Line 1', 'Line 2', 'Line 3', 'Line 4', 'Line 5'); 
+legStr = { 'Line 3', 'Line 4', 'Line 5'};
+legend( legStr ); 
+print (hfff, "total.eps", "-depsc");
