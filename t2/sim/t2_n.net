@@ -1,0 +1,43 @@
+* Circuit simulation lab 2 t>0
+
+
+* current values are saved
+.options savecurrents
+
+* voltage source
+V1 1 0 dc 0;
+*resistors
+R1 2 1 1.02604398505k;
+R2 2 3 2.03674964113k;
+R3 2 5 3.09851037606k;
+R4 5 0 4.10284190715k;
+R5 6 5 3.13763431318k;
+R6 7 0 2.01979218864k;
+R7 9 8 1.03837216927k;
+*voltage controlled current source(Ib)
+G1 6 3 2 5 7.03552682478m;
+*voltage source to sense control current (Id)
+*series with the rest of the circuit for the current sensed to be the same as the resistor
+V2 7 9 dc 0;
+*current controlled voltage source(Vd)
+H1 5 8 v2 8.12635172903k;
+C1 6 8 1.0462067838uF;
+******************
+.ic v(6) = 8.830558  v(8) = 0
+.control
+
+set hcopypscolor=0
+set color0=white
+set color1=black
+set color2=red
+set color3=blue
+set color4=violet
+set color5=rgb:3/8/0
+set color6=rgb:4/0/0
+
+tran 0.02m 20m 0 uic
+hardcopy trans.ps v(6)
+echo trans_FIG
+quit
+.endc
+.end

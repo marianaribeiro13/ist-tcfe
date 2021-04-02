@@ -1,0 +1,34 @@
+* Circuit simulation lab 2 t=0
+
+
+* current values are saved
+.options savecurrents
+
+* voltage source
+V3 6 8 dc 8.830558;
+V1 1 0 ac 0;
+*resistors
+R1 2 1 1.02604398505k;
+R2 2 3 2.03674964113k;
+R3 2 5 3.09851037606k;
+R4 5 0 4.10284190715k;
+R5 6 5 3.13763431318k;
+R6 7 0 2.01979218864k;
+R7 9 8 1.03837216927k;
+*voltage controlled current source(Ib)
+G1 6 3 2 5 7.03552682478m;
+*voltage source to sense control current (Id)
+*series with the rest of the circuit for the current sensed to be the same as the resistor
+V2 7 9 dc 0;
+*current controlled voltage source(Vd)
+H1 5 8 v2 8.12635172903k;
+
+******************
+.control
+op
+*echo "op_TAB"
+print all
+*echo "op_END"
+quit
+.endc
+.end
