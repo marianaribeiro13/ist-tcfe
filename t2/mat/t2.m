@@ -75,7 +75,7 @@ xlabel ("t[ms]");
 ylabel ("v6n(t) [V]");
 print (hf, "natural.eps", "-depsc");
 C1=double(C);
-zc=1/(2*pi*1000*C*i)
+zc=1/(2*pi*100*C*i)
 syms V1p V2p V3p V5p V6p V7p V8p;
 N1p= V1p==1;
 N2p= (V2p-V1p)/R1 + (V2p-V3p)/R2 + (V2p-V5p)/R3==0;
@@ -87,19 +87,18 @@ N8p= Kd*((V7p-V8p)/R7)==V5p-V8p;
 ns= solve(N1p,N2p,N3p,N5p,N6p,N7p,N8p, [V1p V2p V3p V5p V6p V7p V8p]);
   
 V1p = vpa(ns.V1p)
-V2p = vpa(ns.V2p)
-V3p = vpa(ns.V3p)
-V5p = vpa(ns.V5p)
-V6p = vpa(ns.V6p)
-V7p = vpa(ns.V7p)
-V8p = vpa(ns.V8p)
+  V2p = vpa(ns.V2p)
+  V3p = vpa(ns.V3p)
+  V5p = vpa(ns.V5p)
+  V6p = vpa(ns.V6p)
+  V7p = vpa(ns.V7p)
+  V8p = vpa(ns.V8p)
 
 V6r=-0.57979607293241249067088011934093;
 V6im=- 0.000081810508973260330098219669037616;
 
 w=2*pi*1000;
-v6f=V6r*cos(w*t)-V6im*sin(w*t);
-
+v6f=V6r*sin(w*t)+V6im*cos(w*t);
 hff = figure ();
 plot (t*1000, v6f, "b");
 
@@ -107,7 +106,7 @@ xlabel ("t[ms]");
 ylabel ("v6f(t) [V]");
 print (hff, "forced.eps", "-depsc");
 
-v6t=V6r*cos(w*t)-V6im*sin(w*t)+A*exp(-t/TC);
+v6t=V6r*sin(w*t)+V6im*cos(w*t)+A*exp(-t/TC);
 hfff = figure ();
 hold on;
 plot ([-5,0], [double(V6), double(V6)], "r");
@@ -134,22 +133,39 @@ f=logspace(-1,6,35);
 phase = 1:35;
 magn=1:35;
 for j=1:35,
-%zcf=1/(2*pi*f(i)*C1*i);
-V6f=((R5f*(V3f-V2f)-V5f*R2f)/(2*pi*f(j)*C1*i) -R2f*R5f*V8f)/(-(R2f*(R5f+1/(2*pi*f(j)*C1*i))))
-phase(j)=arg(V6f-V8f)*180/pi;
-magn(j)=mag2db(abs(V6f-V8f));
+	zcf=1/(2*pi*f(j)*C1*i);
+%V6f=((R5f*(V3f-V2f)-V5f*R2f)/(2*pi*f(j)*C1*i) -R2f*R5f*V8f)/(-(R2f*(R5f+1/(2*pi*f(j)*C1*i))))
+  V6f = - (R5f*zcf*(V3f-V2f) - V8f*R5f*R2f - zcf*V5f*R2f)/(R2f*(R5f+zcf));
+aux = V6f-V8f;
+aux2=arg(aux);
+ phase(j)=aux2 * 180/pi;
+aux3 = abs(aux);
+magn(j)=mag2db(aux3);
+printf("V6\n")
+disp(V6f)
+printf("\naux\n")
+disp(aux)
 end;
-disp(magn)
+
 hp = figure ();
 plot (log10(f), phase, "r");
 xlabel ("f[Hz]");
 ylabel ("phase(degrees)");
 print (hp, "phasev6.eps", "-depsc");
 
+hp = figure ();
+plot (log10(f), magn, "r");
+xlabel ("f[Hz]");
+ylabel ("magnitude[V]");
+print (hp, "magnitudev6.eps", "-depsc");
+
 T = 1 ./(1+i*2*pi*f*double(Tau));
 numer = [0, 1];
 denom = [double(Tau), 1];
 sys = tf (numer, denom);
 figure
+
 bode(sys, f*2*pi);
+hold on;
+plot (f, phase, "r");
 print ("RC_bode.png", "-dpng");
