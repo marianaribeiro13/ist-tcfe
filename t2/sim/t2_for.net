@@ -1,11 +1,9 @@
-* Circuit simulation lab 2 t>0
-
-
+* Circuit simulation lab 2 t>0 forced
 * current values are saved
 .options savecurrents
 
 * voltage source aqui como dc é 0 sobra só isto
-Vd 1 0 dc 0 sin (0 1 1k 0 0 0);
+Vs 1 0 dc 0 ac 1 sin (0 1 1000 0 0 );
 *resistors
 R1 2 1 1.02604398505k;
 R2 2 3 2.03674964113k;
@@ -25,7 +23,6 @@ C1 6 8 1.0462067838uF;
 ******************
 .ic v(6) = 8.830558  v(8) = 0
 .control
-
 set hcopypscolor=0
 set color0=white
 set color1=black
@@ -34,10 +31,18 @@ set color3=blue
 set color4=violet
 set color5=rgb:3/8/0
 set color6=rgb:4/0/0
-
+*****************************
 tran 0.02m 20m 0 uic
 hardcopy tot.ps v(6) v(1)
 echo tot_FIG
+******************************
+set units = degrees
+ac dec 100 0.1 1MEG
+
+hardcopy mag.ps vdb(6) vdb(1) vdb(6,8)
+echo mag_FIG
+hardcopy phs.ps vp(6) vp(1) vp(6,8)
+echo phs_FIG
 quit
 .endc
 .end
