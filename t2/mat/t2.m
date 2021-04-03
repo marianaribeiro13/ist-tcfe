@@ -114,6 +114,7 @@ plot ([0,0], [double(V6), double(Vx)], "r");
 plot (t*1000, v6t, "r");
 plot (t*1000, v6f, "b");
 plot (t*1000, v6, "g");
+plot (t*1000, sin(2*pi*1000*t), "m", "linewidth", 1);
 hold off;
 xlabel ("t[ms]");
 ylabel ("v6(t) [V]");
