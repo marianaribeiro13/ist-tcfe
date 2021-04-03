@@ -5,7 +5,7 @@
 .options savecurrents
 
 * voltage source aqui como dc é 0 sobra só isto
-Vd 1 0 sin (0 1 1k 0 0 0);
+Vd 1 0 dc 0 sin (0 1 1k 0 0 0);
 *resistors
 R1 2 1 1.02604398505k;
 R2 2 3 2.03674964113k;
