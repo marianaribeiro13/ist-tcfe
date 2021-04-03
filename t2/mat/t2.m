@@ -136,12 +136,20 @@ magn=1:35;
 for j=1:35,
 %zcf=1/(2*pi*f(i)*C1*i);
 V6f=((R5f*(V3f-V2f)-V5f*R2f)/(2*pi*f(j)*C1*i) -R2f*R5f*V8f)/(-(R2f*(R5f+1/(2*pi*f(j)*C1*i))))
-phase(j)=arg(V6f)*180/pi;
-magn(j)=mag2db(abs(V6f));
+phase(j)=arg(V6f-V8f)*180/pi;
+magn(j)=mag2db(abs(V6f-V8f));
 end;
-disp(f)
+disp(magn)
 hp = figure ();
 plot (log10(f), phase, "r");
 xlabel ("f[Hz]");
 ylabel ("phase(degrees)");
 print (hp, "phasev6.eps", "-depsc");
+
+T = 1 ./(1+i*2*pi*f*double(Tau));
+numer = [0, 1];
+denom = [double(Tau), 1];
+sys = tf (numer, denom);
+figure
+bode(sys, f*2*pi);
+print ("RC_bode.png", "-dpng");
