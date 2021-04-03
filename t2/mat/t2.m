@@ -4,6 +4,7 @@ clear all
 %%SYMBOLIC COMPUTATIONS
 
 pkg load symbolic
+pkg load control
 
 R1 = sym ('1.02604398505');
 R2 = sym ('2.03674964113');
@@ -73,7 +74,7 @@ plot (t*1000, v6, "r");
 xlabel ("t[ms]");
 ylabel ("v6n(t) [V]");
 print (hf, "natural.eps", "-depsc");
-
+C1=double(C);
 zc=1/(2*pi*1000*C*i)
 syms V1p V2p V3p V5p V6p V7p V8p;
 N1p= V1p==1;
@@ -97,7 +98,7 @@ V6r=-0.57979607293241249067088011934093;
 V6im=- 0.000081810508973260330098219669037616;
 
 w=2*pi*1000;
-v6f=V6r*cos(-w*t)-V6im*sin(-w*t);
+v6f=V6r*cos(w*t)-V6im*sin(w*t);
 
 hff = figure ();
 plot (t*1000, v6f, "b");
@@ -106,7 +107,7 @@ xlabel ("t[ms]");
 ylabel ("v6f(t) [V]");
 print (hff, "forced.eps", "-depsc");
 
-v6t=V6r*cos(-w*t)-V6im*sin(-w*t)+A*exp(-t/TC);
+v6t=V6r*cos(w*t)-V6im*sin(w*t)+A*exp(-t/TC);
 hfff = figure ();
 hold on;
 plot ([-5,0], [double(V6), double(V6)], "r");
@@ -122,3 +123,25 @@ xlabel ("t[ms]");
 ylabel ("[V]");
 axis ([-5 20 -1.5 10]) 
 print (hfff, "total.eps", "-depsc");
+
+R2f=double(R2);
+R5f=double(R5);
+V3f=double(V3p);
+V2f=double(V2p);
+V5f=double(V5p);
+V8f=double(V8p);
+f=logspace(-1,6,35);
+phase = 1:35;
+magn=1:35;
+for j=1:35,
+%zcf=1/(2*pi*f(i)*C1*i);
+V6f=((R5f*(V3f-V2f)-V5f*R2f)/(2*pi*f(j)*C1*i) -R2f*R5f*V8f)/(-(R2f*(R5f+1/(2*pi*f(j)*C1*i))))
+phase(j)=arg(V6f)*180/pi;
+magn(j)=mag2db(abs(V6f));
+end;
+disp(f)
+hp = figure ();
+plot (log10(f), phase, "r");
+xlabel ("f[Hz]");
+ylabel ("phase(degrees)");
+print (hp, "phasev6.eps", "-depsc");
