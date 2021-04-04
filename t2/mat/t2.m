@@ -171,47 +171,42 @@ print (hfff, "total.eps", "-depsc");
 
 R2f=double(R2);
 R5f=double(R5);
+V1f = double (V1p);
 V3f=double(V3p);
 V2f=double(V2p);
 V5f=double(V5p);
 V8f=double(V8p);
-f=logspace(-1,6,35);
-phase = 1:35;
-magn=1:35;
-for j=1:35,
-	zcf=1/(2*pi*f(j)*C1*i);
-%V6f=((R5f*(V3f-V2f)-V5f*R2f)/(2*pi*f(j)*C1*i) -R2f*R5f*V8f)/(-(R2f*(R5f+1/(2*pi*f(j)*C1*i))))
-  V6f = - (R5f*zcf*(V3f-V2f) - V8f*R5f*R2f - zcf*V5f*R2f)/(R2f*(R5f+zcf));
-aux = V6f-V8f;
-aux2=arg(aux);
- phase(j)=aux2 * 180/pi;
-aux3 = abs(aux);
-magn(j)=mag2db(aux3);
-printf("V6\n")
-disp(V6f)
-printf("\naux\n")
-disp(aux)
-end;
-
-hp = figure ();
-plot (log10(f), phase, "r");
-xlabel ("f[Hz]");
-ylabel ("phase(degrees)");
-print (hp, "phasev6.eps", "-depsc");
-
-hp = figure ();
-plot (log10(f), magn, "r");
-xlabel ("f[Hz]");
-ylabel ("magnitude[V]");
-print (hp, "magnitudev6.eps", "-depsc");
+f=logspace(-1,6,200);
 
 T = 1 ./(1+i*2*pi*f*double(Tau));
+T6 = 1 ./(1+i*2*pi*f*double(Tau)) + V8f;
+
+ht = figure ();
+hold on;
+plot (log10(f), arg(T)*180/pi, "g- ;Vc(f);");
+plot (log10(f), arg(T6)*180/pi,"r- ;V6(f);");
+plot ([-1,6], [arg(V1f)*180/pi,arg(V1f)*180/pi],"b- ;Vs(f);");
+hold off;
+xlabel ("Log_{10}(f)[Hz]");
+ylabel ("Phase(degrees)");
+print (ht, "Phase.eps", "-depsc");
+
+
+hm = figure ();
+hold on;
+plot (log10(f), mag2db(abs(T)), "g- ;Vc(f);");
+plot (log10(f), mag2db(abs(T6)),"r- ;V6(f);");
+plot ([-1,6], [mag2db(abs(V1f)),mag2db(abs(V1f))],"b- ;Vs(f);");
+hold off;
+xlabel ("Log_{10}(f)[Hz]");
+ylabel ("Magnitude(dB)");
+legend ('location', 'west');
+print (hm, "Magnitude.eps", "-depsc");
+
 numer = [0, 1];
 denom = [double(Tau), 1];
 sys = tf (numer, denom);
 figure
 
 bode(sys, f*2*pi);
-hold on;
-plot (f, phase, "r");
 print ("RC_bode.png", "-dpng");
