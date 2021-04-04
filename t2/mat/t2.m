@@ -1,6 +1,7 @@
 close all
 clear all
 format long
+output_precision(11)
 %%SYMBOLIC COMPUTATIONS
 #include "oct-stream.h"
 pkg load symbolic
@@ -14,6 +15,7 @@ C=cell2mat(m_s(1,3))
 fclose(fid);
 D=C(8)
 E=C(9)
+printf("%f", C(6))
 R1 = sym (A(1));
 R2 = sym (B(2,1));
 R3 = sym (C(1));
@@ -26,9 +28,21 @@ Vs = sym (C(6));
 C = sym (C(7));
 Kb = sym (D);
 Kd = sym (E);
+R1d = double(R1);
+R2d =  double(R2);
+R3d =  double(R3);
+R4d = double(R4);
+R5d =  double(R5);
+R6d =  double(R6);
+R7d =  double(R7);
+
+Vsd =  double(Vs);
+Cd =  double(C);
+Kbd =  double(Kb);
+Kdd =  double(Kd);
 filename='octave.txt';
 fp=fopen('octave.txt', 'w')
-fprintf(fp, "
+fprintf(fp, " V1 1 0 dc %.11f \n R1 1 2 %f \n R2 2 3 %f \n R3 2 5 %f \n R4 0 5 %f \n R5 5 6 %f \n R6 07 %f \n R7 9 8 %f \n G1 6 3 2 5 %f \n v2 7 9 dc 0 \n H1 5 8 v2 %f \n", Vsd, R1d, R2d, R3d, R4d, R5d, R6d, R7d, Kbd, Kdd);
 printf("\n\n \\subsection{Nodal Analysis}\n");
 syms V1 V2 V3 V5 V6 V7 V8;
 N1= V1==Vs;
