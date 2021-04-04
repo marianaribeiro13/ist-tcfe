@@ -1,24 +1,34 @@
 close all
 clear all
-
+format long
 %%SYMBOLIC COMPUTATIONS
-
+#include "oct-stream.h"
 pkg load symbolic
 pkg load control
+fid=fopen('../data.txt', 'r');
+m_p = textscan(fid,'%s %s %s %f','delimiter', ' ', 'HeaderLines', 8);
+m_s = textscan(fid,' %s %s %f','delimiter', ' ')
+A=cell2mat(m_p(1,4));
+B=cell2mat(m_p(1,3));
+C=cell2mat(m_s(1,3))
+fclose(fid);
+D=C(8)
+E=C(9)
+R1 = sym (A(1));
+R2 = sym (B(2,1));
+R3 = sym (C(1));
+R4 = sym (C(2));
+R5 = sym (C(3));
+R6 = sym (C(4));
+R7 = sym (C(5));
 
-R1 = sym ('1.02604398505');
-R2 = sym ('2.03674964113');
-R3 = sym ('3.09851037606');
-R4 = sym ('4.10284190715');
-R5 = sym ('3.13763431318');
-R6 = sym ('2.01979218864');
-R7 = sym ('1.03837216927');
-
-Vs = sym ('5.23334661904');
-C = sym ('1.0462067838');
-Kb = sym ('7.03552682478');
-Kd = sym ('8.12635172903');
-
+Vs = sym (C(6));
+C = sym (C(7));
+Kb = sym (D);
+Kd = sym (E);
+filename='octave.txt';
+fp=fopen('octave.txt', 'w')
+fprintf(fp, "
 printf("\n\n \\subsection{Nodal Analysis}\n");
 syms V1 V2 V3 V5 V6 V7 V8;
 N1= V1==Vs;

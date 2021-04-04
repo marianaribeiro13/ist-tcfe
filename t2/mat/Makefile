@@ -3,5 +3,5 @@ octave.log: t2.m
 
 clean:
 	@rm -f octave.log octave-workspace *.eps *~
-
+	@rm -f RC_bode.png
 .PHONY: clean
