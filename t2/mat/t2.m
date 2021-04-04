@@ -1,48 +1,56 @@
 close all
 clear all
 format long
-output_precision(11)
+
 %%SYMBOLIC COMPUTATIONS
 #include "oct-stream.h"
 pkg load symbolic
 pkg load control
+digits(11)
+output_precision(11)
 fid=fopen('../data.txt', 'r');
 m_p = textscan(fid,'%s %s %s %f','delimiter', ' ', 'HeaderLines', 8);
-m_s = textscan(fid,' %s %s %f','delimiter', ' ')
+fclose(fid);
+fid=fopen('../data.txt', 'r');
+m_s = textscan(fid,' %s %s %f','delimiter', ' ', 'HeaderLines', 9)
 A=cell2mat(m_p(1,4));
 B=cell2mat(m_p(1,3));
-C=cell2mat(m_s(1,3))
+C=cell2mat(m_s(1,3));
 fclose(fid);
-D=C(8)
-E=C(9)
-printf("%f", C(6))
-R1 = sym (A(1));
-R2 = sym (B(2,1));
-R3 = sym (C(1));
-R4 = sym (C(2));
-R5 = sym (C(3));
-R6 = sym (C(4));
-R7 = sym (C(5));
+D=C(9);
+E=C(10);
+Vsd=C(7);
+R1d = A(1);
+R2d = C(1);
+R3d = C(2);
+R4d = C(3);
+R5d = C(4);
+R6d = C(5);
+R7d = C(6);
+Cd =  C(8);
 
-Vs = sym (C(6));
-C = sym (C(7));
+R1 = sym (A(1));
+R2 = sym (R2d);
+R3 = sym (R3d);
+R4 = sym (R4d);
+R5 = sym (R5d);
+R6 = sym (R6d);
+R7 = sym (R7d);
+
+Vs = sym (Vsd);
+C = sym (Cd);
 Kb = sym (D);
 Kd = sym (E);
-R1d = double(R1);
-R2d =  double(R2);
-R3d =  double(R3);
-R4d = double(R4);
-R5d =  double(R5);
-R6d =  double(R6);
-R7d =  double(R7);
 
-Vsd =  double(Vs);
-Cd =  double(C);
-Kbd =  double(Kb);
-Kdd =  double(Kd);
+Kbd =  D;
+Kdd =  E;
+
 filename='octave.txt';
-fp=fopen('octave.txt', 'w')
-fprintf(fp, " V1 1 0 dc %.11f \n R1 1 2 %f \n R2 2 3 %f \n R3 2 5 %f \n R4 0 5 %f \n R5 5 6 %f \n R6 07 %f \n R7 9 8 %f \n G1 6 3 2 5 %f \n v2 7 9 dc 0 \n H1 5 8 v2 %f \n", Vsd, R1d, R2d, R3d, R4d, R5d, R6d, R7d, Kbd, Kdd);
+fp=fopen('octave.txt', 'w');
+fprintf(fp, " V1 1 0 dc %.11f \n R1 1 2 %.11fk \n R2 2 3 %.11fk \n R3 2 5 %.11fk \n R4 0 5 %.11fk \n R5 5 6 %.11fk \n R6 0 7 %.11fk \n R7 9 8 %.11fk \n G1 6 3 2 5 %.11fm \n v2 7 9 dc 0 \n H1 5 8 v2 %.11fk \n", Vsd, R1d, R2d, R3d, R4d, R5d, R6d, R7d, Kbd, Kdd);
+fclose(fp);
+
+
 printf("\n\n \\subsection{Nodal Analysis}\n");
 syms V1 V2 V3 V5 V6 V7 V8;
 N1= V1==Vs;
@@ -63,7 +71,12 @@ V7 = vpa(ns.V7)
 V8 = vpa(ns.V8)
  
 Vx=V6-V8
-  
+vx = double (Vx);
+filename='oc0.txt';
+f0=fopen('oc0.txt', 'w');
+fprintf(f0, " V3 6 8 dc %.11f \n  R1 1 2 %.11fk \n R2 2 3 %.11fk \n R3 2 5 %.11fk \n R4 0 5 %.11fk \n R5 5 6 %.11fk \n R6 0 7 %.11fk \n R7 9 8 %.11fk \n G1 6 3 2 5 %.11fm \n v2 7 9 dc 0 \n H1 5 8 v2 %.11fk \n", vx, R1d, R2d, R3d, R4d, R5d, R6d, R7d, Kbd, Kdd);
+fclose(f0);
+
 syms V2x V3x V5x V6x V7x V8x;
 N2x= (V2x)/R1 + (V2x - V3x)/R2 + (V2x - V5x)/R3==0;
 N3x= V2x - V5x == (V3x - V2x)/(R2*Kb);
@@ -99,7 +112,7 @@ xlabel ("t[ms]");
 ylabel ("v6n(t) [V]");
 print (hf, "natural.eps", "-depsc");
 C1=double(C);
-zc=1/(2*pi*100*C*i)
+zc=1/(2*pi*1000*C*i)
 syms V1p V2p V3p V5p V6p V7p V8p;
 N1p= V1p==1;
 N2p= (V2p-V1p)/R1 + (V2p-V3p)/R2 + (V2p-V5p)/R3==0;
@@ -118,8 +131,17 @@ V1p = vpa(ns.V1p)
   V7p = vpa(ns.V7p)
   V8p = vpa(ns.V8p)
 
-V6r=-0.57979607293241249067088011934093;
-V6im=- 0.000081810508973260330098219669037616;
+
+filename='oc1.txt';
+f1=fopen('oc1.txt', 'w');
+fprintf(f1, "R1 2 1 %.11fk \n R2 2 3 %.11fk \n R3 2 5 %.11fk \n R4 5 0 %.11fk \n R5 6 5 %.11fk \n R6 7 0 %.11fk \n R7 9 8 %.11fk \n G1 6 3 2 5 %.11fm \n v2 7 9 dc 0 \n H1 5 8 v2 %.11fk \n C1 6 8 %.11fuF\n ", R1d, R2d, R3d, R4d, R5d, R6d, R7d, Kbd, Kdd, Cd);
+fclose(f1);
+
+V6ra = real(V6p);
+V6ima = imag (V6p);
+
+V6r = double(V6ra);
+V6im = double (V6ima);
 
 w=2*pi*1000;
 v6f=V6r*sin(w*t)+V6im*cos(w*t);
