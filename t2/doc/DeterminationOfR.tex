@@ -1,0 +1,61 @@
+\subsection{Determination of $R_{eq}$}
+\label{section:R}
+Just as suggested, we made $V_s = 0$ and replaced the capacitor with a voltage source $V_x= V(6)-V(8)$, where V(6) and V(8) are the voltages in nodes 6 and 8 as obtained in section ~\ref{}. Then, we made once again the nodal analysis, with the purpose of obtaining values for $I_x$ and $V-x$. Now, we only need 6 equations, because the GND node and node 1 become the same node.\\
+For node 2, we get:
+\begin{equation}
+\frac{V_2}{R_1} + \frac{V_2 - V_3}{R_2} + \frac{V_2 - V_5}{R_3} = 0 \Leftrightarrow V_2\left( \frac{1}{R_1} + \frac{1}{R_2} + \frac{1}{R_3} \right) - \frac{V_3}{R_2} - \frac{V_5}{R_3}=0
+\end{equation}
+
+For node 3, remembering the equation (A DO IB):
+\begin{equation}
+\frac{V_3 - V_2}{R_2\times K_b }+ V_5 - V_2 = 0 \Leftrightarrow V_2 \left(-\frac{1}{R_2\times K_b} - 1\right) + \frac{V_3}{R_2\times K_b} + V_5 = 0
+\end{equation}
+
+For node 5:
+\begin{equation}
+\frac{V_5}{R_4}+ \frac{V_5-V_2}{R_3} + \frac{V_5-V_6}{R_5} + i_d= 0 
+\end{equation}
+
+Where $i_d$ is the current passing trough the dependent voltage source $V_d$ ($i_d = -(I_d + I_x)$).
+
+For node 6 (remebering the equation A DO IB)we get:
+\begin{equation}
+I_b + \frac{V_6-V_5}{R_5} + I_x = 0 \Leftrightarrow I_x = \frac{V_2-V_3}{R_2} + \frac{V_5-V_6}{R_5}
+\end{equation}
+
+And also:
+\begin{equation}
+V_6-V_8 = V_x
+\end{equation}
+
+For node 7:
+\begin{equation}
+V7x==R6*((V8x - V7x)/R7);
+-I_d + \frac{V_7-V_8}{R_7} = 0 \Leftrightarrow \frac{V_7}{R_6} - \frac{V_7-V_8}{R_7} = 0\Leftrightarrow V_7\left(\frac{1}{R_6} + \frac{1}{R_7}\right) - \frac{V_8}{R_7} = 0
+\end{equation}
+
+Combinig equations (a do nodo 5), (primeira do nodo 6) and noticing that $I_d = \frac{V_7-V_8}{R_7}$:
+\begin{equation}
+V_2 \left( -\frac{1}{R_2} - \frac{1}{R_3}\right) + \frac{V_3}{R_2} +  V_5 \left( \frac{1}{R_3} + \frac{1}{R_4}\right) - \frac{V_7}{R_7} + \frac{V_8}{R_7} = 0
+\end{equation}
+
+Knowing that $I_d = \frac{V_d}{K_d}$ and $I_d = \frac{V_7-V_8}{R_7}$, we get the final equation:
+\begin{equation}
+V_8\left( \frac{1}{R_7} - \frac{1}{K_d}\right) - \frac{V_7}{R_7} + \frac{V_5}{K_d}
+\end{equation}
+
+
+The next step is to solve the following system of equations (COMO FAÇO COM O VX????????????):
+\begin{equation}
+\left(\begin{array}{ccccccc} \frac{1}{R_1}+\frac{1}{R_2} +\frac{1}{R_3} & -\frac{1}{R_2} & -\frac{1}{R_3} & 0 & 0 & 0&0\\ -\frac{1}{R_2\times K_b}-1 & \frac{1}{R_2\times K_b} & 1 & 0 & 0 & 0 & 0\\ -\frac{1}{R_2}-\frac{1}{R_3} & \frac{1}{R_2} & \frac{1}{R_3}+\frac{1}{R_4} & 0& -\frac{1}{R_7} &\frac{1}{R_7} & 0\\ 0&0&0&1&0&-1&-1\\0&0&0&0&\frac{1}{R_6}+\frac{1}{R_7}&-\frac{1}{R_7}&0 \\ 0&0&\frac{1}{K_d}&0&-\frac{1}{R_7}&\frac{1}{R_7}-\frac{1}{K_d}&0\end{array}\right)
+\left(\begin{array}{c} V_2 \\ V_3 \\ V_5 \\ V_6 \\ V_7 \\ V_8 \\ V_x\end{array}\right) 
+= \left(\begin{array}{c} 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0\end{array}\right)
+\end{equation}
+
+Finally, we can calculate $I_x$ using equation (VER), the equivalent resistance $R_{eq}$ and the time constant, $\tau$: 
+\begin{equation}
+R_{eq}=-\frac{V_x}{I_x}
+\end{equation}
+\begin{equation}
+\tau=\frac{R_{eq}\times C}{1000}
+\end{equation}
