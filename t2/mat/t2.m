@@ -93,7 +93,7 @@ V6x = vpa(ns.V6x)
 V7x = vpa(ns.V7x)
 V8x = vpa(ns.V8x)
 
-Ix=-V6x/R5
+Ix=(V2x-V3x)/R2 + (V5x-V6x)/R5
 Req=-Vx/Ix
 Tau=Req*C/1000
 
@@ -130,11 +130,12 @@ V1p = vpa(ns.V1p)
   V6p = vpa(ns.V6p)
   V7p = vpa(ns.V7p)
   V8p = vpa(ns.V8p)
-
+V6xa = double (V6x);
+V8xa = double (V8x);
 
 filename='oc1.txt';
 f1=fopen('oc1.txt', 'w');
-fprintf(f1, "R1 2 1 %.11fk; \n R2 2 3 %.11fk \n R3 2 5 %.11fk; \n R4 5 0 %.11fk; \n R5 6 5 %.11fk; \n R6 7 0 %.11fk; \n R7 9 8 %.11fk; \n G1 6 3 2 5 %.11fm; \n v2 7 9 dc 0; \n H1 5 8 v2 %.11fk; \n C1 6 8 %.11fuF;\n ", R1d, R2d, R3d, R4d, R5d, R6d, R7d, Kbd, Kdd, Cd);
+fprintf(f1, "R1 2 1 %.11fk; \n R2 2 3 %.11fk \n R3 2 5 %.11fk; \n R4 5 0 %.11fk; \n R5 6 5 %.11fk; \n R6 7 0 %.11fk; \n R7 9 8 %.11fk; \n G1 6 3 2 5 %.11fm; \n v2 7 9 dc 0; \n H1 5 8 v2 %.11fk; \n C1 6 8 %.11fuF;\n .ic v(6) = %f v(8) = %f;\n", R1d, R2d, R3d, R4d, R5d, R6d, R7d, Kbd, Kdd, Cd, V6xa, V8xa);
 fclose(f1);
 
 V6ra = real(V6p);
