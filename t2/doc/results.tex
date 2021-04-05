@@ -1,0 +1,106 @@
+\section{Results}
+\subsection{Analysis for t\textless0}
+\label{ssec:lessthan}
+The solution of the matrix and the respective table with the nodal analysis results from section ~\ref{ssec:tl}, obtained using \textit{octave}, can be seen below.\\
+\input{../mat/minor}
+The respective ngspice simulation results, to compare with the previous ones can be seen in Table 2.\\
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|l|r|}
+    \hline    
+    {\bf Name} & {\bf Value [A or V]} \\ \hline
+    \input{../sim/op_tab}
+  \end{tabular}
+  \caption{Operating point. A variable preceded by @ is of type {\em current}
+    and expressed in Ampere; other variables are of type {\it voltage} and expressed in
+    Volt.}
+  \label{tab:op}
+\end{table}
+
+\subsection{Analysis for t=0}
+\label{ssec:equal}
+The solution of the matrix and the respective table with the nodal analysis results from section ~\ref{ssec:R}, obtained using \textit{octave}, can be seen below.Here we also get $I_x$ and $R_{eq}$.\\
+\input{../mat/equal}
+The same analysis using ngspice yields the following results.\\
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|l|r|}
+    \hline    
+    {\bf Name} & {\bf Value [A or V]} \\ \hline
+    \input{../sim/op_tabs}
+  \end{tabular}
+  \caption{Operating point. A variable preceded by @ is of type {\em current}
+    and expressed in Ampere; other variables are of type {\it voltage} and expressed in
+    Volt.}
+  \label{tab:ops}
+\end{table}
+Here we also got, for Ix\footnote{using 96514 as the generating number}, -2.81440 mA.\\
+\subsection{t\textgreater0: Natural Response}
+The plot for the natural of the voltage in node 6, as a function of time can be seen in Figure ~\ref{fig:rc1}.\\
+\begin{figure}[H] \centering
+\includegraphics[width=0.4\linewidth]{natural.eps}
+\caption{Natural response of V6 [0,20]ms using octave}
+\label{fig:rc1}
+\end{figure}
+
+The same plot, obtained by transient analysis using \textit{ngspice}, is in Figure ~\ref{fig:rc2}.\\
+\begin{figure}[H] \centering
+\includegraphics[width=0.4\linewidth]{../sim/trans.pdf}
+\caption{Natural response of V6 in [0,20]ms using ngspice}
+\label{fig:rc2}
+\end{figure}
+As we can see, we get the same result using both methods.
+
+\subsection{t\textgreater0: Forced Response}
+The phasor nodal voltages obtained can be seen in the table below.\\
+\input{../mat/major}
+The plot of the forced component of V6 can be seen in Figure ~\ref{fig:ii}
+ \begin{figure}[H] \centering
+\includegraphics[width=0.4\linewidth]{forced.eps}
+\caption{Force component of V6 in [0,20]ms using octave}
+\label{fig:ii}
+ \end{figure}
+
+\subsection{t\textgreater0: Total Response}
+  The plot of the full response of node 6 (with contributions from the natural and forced components) and the voltage in node 1, in the time interval [-5,20]ms, from \textit{octave} is in Figure ~\ref{fig:aa}.\\
+ \begin{figure}[H] \centering
+\includegraphics[width=0.4\linewidth]{total.eps}
+\caption{V6 and V1 in [-5,20]ms  using octave}
+\label{fig:aa}
+ \end{figure}
+ The same plot using ngpice in the time interval [0,20]ms, is in Figure ~\ref{fig:bb}
+ \begin{figure}[H] \centering
+\includegraphics[width=0.4\linewidth]{../sim/tot.pdf}
+\caption{V6 and V1 in [0,20]ms using ngspice}
+\label{fig:bb}
+\end{figure}
+
+As we can see, we get the same results from both analysis.
+
+\subsection{Frequency Analysis}
+The plots of magnitude from frequency response in nodes 1 and 6, and in the capacitor, using \textit{octave} can be seen in Figure ~\ref{fig:cc}, and using \textit{ngspice} in Figure ~\ref{fig:dd}\\
+ \begin{figure}[H] \centering
+\includegraphics[width=0.4\linewidth]{Magnitude.eps}
+\caption{V6(1),V1(f) and Vc(f) using octave}
+\label{fig:cc}
+ \end{figure}
+
+  \begin{figure}[H] \centering
+\includegraphics[width=0.4\linewidth]{../sim/mag.pdf}
+\caption{V6(1),V1(f) and Vc(f) using ngspice}
+\label{fig:dd}
+\end{figure}
+
+The plots of phase from frequency response in nodes 1 and 6, and in the capacitor, using \textit{octave} can be seen in Figure ~\ref{fig:ee}, and using \textit{ngspice} in Figure ~\ref{fig:ff}
+ \begin{figure}[H] \centering
+\includegraphics[width=0.4\linewidth]{Phase.eps}
+\caption{V6 and V1 in [0,20]ms using ngspice}
+\label{fig:ee}
+ \end{figure}
+
+  \begin{figure}[H] \centering
+\includegraphics[width=0.4\linewidth]{../sim/phs.pdf}
+\caption{V6 and V1 in [0,20]ms using ngspice}
+\label{fig:ff}
+\end{figure}
+We can see these phase plots are the same, no matter the method used.
