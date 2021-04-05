@@ -1,5 +1,9 @@
 \subsection{Frequency response}
+\label{ssec:freq}
 A transfer function is a function that computes output from input. In the case of an RC circuit such as the one being studied here, the transfer function is simply the quotient of phasors, the phasor correspondent to the voltage of the capacitor ($v_c (t)$) and the phasor correspondent to the voltage source ($v_s (t)$):
 \[ T(\omega)= \frac{\widetilde{v_c}}{\widetilde{v_s}}=\frac{1}{1+j\omega R C}\]
-Since the transfer function is complex, we can represent its magnitude and phase as functions of $\omega$. 
-\[ |T(\omega)|= \frac{1}{\sqrt{1+\omega^2 R^2 C^2}}\]
+Here,$\widetilde{v_s}=1$.
+\[ T(\omega)= \widetilde{v_c}=\frac{1}{1+j\omega R C}\]
+We could then get the plot of $v_c(f)$ using this expression.We know $V_8$ from previous analysis, and knowing it is independent from frequency, since the voltage in node 7, not connected to the capacitor or the voltage source $V_s$ is also independent of frequency, and $V_8$ is related only to this voltage by equation \eqref{eqn:v8}. This voltage is known from previous analysis (Section ~\ref{ssec:fs}), and knowing the tansfer function, from the relation
+\[V_c=V_6-V_8\]
+we can also plot $V_6$ as a function of frequency.

@@ -1,10 +1,11 @@
 \section{Theoretical analysis}
 \label{sec:ta}
-\subsection{Operating point analysis for t<0}
-For t<0, from equation (por aqui equação da função de ramos da voltagem) we can see that $v_s (t)= V_s$. That means the voltage source drives constant voltage $V_s$. We consider that enough time has passed for the capacitor to fully charge from this constant voltage, so the voltage at nodes 6 and 8 are the same and there is no current flowing through the capacitor (it now acts as an open circuit). Removing the part of the circuit that is an open circuit we get a "new" circuit, that is easy to analyse: \\
-\begin{figure}[h] \centering
+\subsection{Operating point analysis for t\textless0}
+\label{ssec:tl}
+For t\textless0, from equation (por aqui equação da função de ramos da voltagem) we can see that $v_s (t)= V_s$. That means the voltage source drives constant voltage $V_s$. We consider that enough time has passed for the capacitor to fully charge from this constant voltage, so the voltage at nodes 6 and 8 are the same and there is no current flowing through the capacitor (it now acts as an open circuit). Removing the part of the circuit that is an open circuit we get a "new" circuit, that is easy to analyse: \\
+\begin{figure}[H] \centering
 \includegraphics[width=0.8\linewidth]{tmenor0.pdf}
-\caption{Circuit to analyse for t<0}
+\caption{Circuit to analyse for t\textless0}
 \label{fig:zim}
 \end{figure}
 
@@ -35,6 +36,7 @@ The equations for the 7 nodes are:
 \\
 The next step is to solve the system of equations: \\
 \\
+\begin{equation}
 \left(\begin{array}{ccccccc} 
 1 & 0 & 0 & 0 & 0 & 0 & 0\\
 -\frac{1}{R_1} & \frac{1}{R_1}+\frac{1}{R_2}+\frac{1}{R_3} & -\frac{1}{R_2} & -\frac{1}{R_3}& 0 & 0 & 0 \\
@@ -46,3 +48,4 @@ The next step is to solve the system of equations: \\
 \end{array}\right)
 \left(\begin{array}{c} V_1 \\ V_2 \\ V_3 \\ V_5 \\ V_6 \\ V_7 \\ V_8 \end{array}\right) 
 = \left(\begin{array}{c} V_s\\ 0 \\ 0 \\ 0 \\0 \\ 0 \\0 \end{array}\right)
+\end{equation}

@@ -1,6 +1,12 @@
 \subsection{Forced solution}
-For t>0, the voltage source has the form $v_s(t)=sin(2 \pi  f t)$, where $f$ represents the frequency of the sinusoidal excitation. We expect that if we allow the system to evolve for a sufficient amount of time (enough that the natural solution dies out), the voltage at node 6 (the node near the capacitor) will also tend towards a sinusoidal signal. \\
-Since this circuit has a lot of components, it helps to use phasor notation, in which the voltages become the real part of complex vectors (called phasors), with information about the magnitude and phase of the signal. When we do nodal analysis we can ignore the time dependance and introduce it at the end, multiplying the phasors by the term $e^{2 \pi f t j}$, where $f$ is the forced frequency (imposed by the voltage source), taking finally the real combination of sine and cosine functions. \\
+\label{ssec:fs}
+For t\textgreater0, the voltage source has the form $v_s(t)=sin(2 \pi  f t)$, where $f$ represents the frequency of the sinusoidal excitation. We expect that if we allow the system to evolve for a sufficient amount of time (enough that the natural solution dies out), the voltage at node 6 (the node near the capacitor) will also tend towards a sinusoidal signal. \\
+Since this circuit has a lot of components, it helps to use phasor notation, in which the voltages become the real or imaginary part of complex vectors (called phasors), with information about the magnitude and phase of the signal. Since our function is a sine, we will use the imaginary component of the phasors. When we do nodal analysis we can ignore the time dependance and introduce it at the end, multiplying the phasors by the term $e^{2 \pi f t j}$, where $f$ is the forced frequency (imposed by the voltage source), taking finally the imaginary combination of sine and cosine functions: \\
+\begin{equation}
+V_6(t) = R(V_6)sin(\omega t)+Im(V_6)cos(\omega t)
+\end{equation}
+where $\omega=2\pi f$.
+Since  $v_s(t)=sin(2 \pi  f t)$, the magnitude of $V_{s}=1$ and its phase is 0.
 Since we are using phasors, where voltages and currents are complex numbers, we also need to substitute the capacitor with its impedance (which is the resistance equivalent for phasors). The impedance of the capacitor can be expressed by $z_{c}=\frac{1}{2 \pi f C j}$. \\
 The new nodal equations become: \\
 \begin{equation}
@@ -18,13 +24,14 @@ The new nodal equations become: \\
 \begin{equation}
     \frac{V_{3}- V_{2}}{R_{2}} + \frac{V_{6}-V_{5}}{R_{5}} + \frac{V_{6}-V_{8}}{z_c} = 0
 \end{equation}
-\begin{equation}
+\begin{equation}\label{eqn:v8}
     V_{7}+ R_6 \left(\frac{V_{7}-V_{8}}{R_{7}}\right) = 0
 \end{equation}
 \begin{equation}
   V_{8}-V_{5} + K_d \left(\frac{V_{8}-V_{7}}{R_{7}}\right) = 0
 \end{equation}
 The system of equations in matrix form: \\
+\begin{equation}
 \left(\begin{array}{ccccccc} 
 1 & 0 & 0 & 0 & 0 & 0 & 0\\
 -\frac{1}{R_1} & \frac{1}{R_1}+\frac{1}{R_2}+\frac{1}{R_3} & -\frac{1}{R_2} & -\frac{1}{R_3}& 0 & 0 & 0 \\
@@ -36,3 +43,5 @@ The system of equations in matrix form: \\
 \end{array}\right)
 \left(\begin{array}{c} V_1 \\ V_2 \\ V_3 \\ V_5 \\ V_6 \\ V_7 \\ V_8 \end{array}\right) 
 = \left(\begin{array}{c} 1 \\ 0 \\ 0 \\ 0 \\0 \\ 0 \\0 \end{array}\right)
+\end{equation}
+

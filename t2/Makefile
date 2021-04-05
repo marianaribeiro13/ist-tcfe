@@ -7,8 +7,9 @@
 all:
 	@python t2_datagen.py > data.txt
 	make -C mat
+	make -C sim
 	make -C doc
-	cp doc/report.pdf .
+	cp doc/report.pdf . 
 
 clean:
 	@rm -f data.txt

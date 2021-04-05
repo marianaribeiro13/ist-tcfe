@@ -1,10 +1,11 @@
 \subsection{Final Solution}
-The final solution for $V_6(t)$ incorporates the natural and forced solution:
+\label{ssec:fin}
+The final solution for $V_6(t)$ is the superposition the natural and forced solutions:
 \begin{equation}
 V_6(t) = V_{6n}(t) + V_{6f}(t)
 \end{equation}
-Before $V_6(t)$ is a constant (and so is $V_s(t)$), but in the instant t = 0, $V_6(0)=V_x$ and $V_s(0) = 0$. Then, for t > 0, $V_s(t) = sin(2\pi ft)$ and $V_6(t)$, from de sections ~\ref{section:n} and ~\ref{}, is:
+For t\textless0, $V_6(t)$ is a constant (and so is $V_s(t)$), but in the instant t = 0, $V_6(0)=V_x$ and $V_s(0) = 0$. Then, for t\textgreater0, $V_s(t) = sin(2\pi ft)$ and $V_6(t)$, from de sections ~\ref{ssec:n} and ~\ref{ssec:fs}, is:
 \begin{equation}
-V_6(t) = R(V_6)\times sin(wt)+Im(V_6)\times cos(wt)+Aexp(-\frac{t}{\tau})
+V_6(t) = R(V_6)sin(wt)+Im(V_6)cos(wt)+Aexp(-\frac{t}{\tau})
 \end{equation}
 Finally, using \textit{Octave}, we plotted both $V_s(t)$ and $V_6(t)$ in the same figure in the interval [-5, 20] ms.
