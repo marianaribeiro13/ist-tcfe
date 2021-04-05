@@ -91,7 +91,7 @@ minor=fopen('minor.tex', 'w');
  fprintf(minor, "$ \\left(\\begin{array}{c} V_1 \\\\ V_2 \\\\ V_3 \\\\ V_5 \\\\ V_6 \\\\ V_7 \\\\ V_8 \\end{array}\\right)= \\left(\\begin{array}{c} %f \\\\ %f \\\\ %f \\\\ %f \\\\ %f \\\\ %f \\\\ %f \\end{array}\\right) $", Vm1, Vm2, Vm3, Vm5, Vm6, Vm7, Vm8);
 
   
-fprintf(minor, "\n \\begin{table}[H]\n \\footnotesize\n \\centering\n \\caption{Nodal Analysis results}\n \\label{tab:tables}\n \\begin{center}\n \\begin{tabular}{ccc} \n & Voltage (V)/Current(mA) \\\\ \n \\hline \n\n\n \\hline \n $R_1$ & %f // %f \\\\ \n \\hline \n $R_2$ & %f // %f\\\\ \n \\hline \n $R_3$ & %f // %f \\\\ \n \\hline \n $R_4$ & - // %f \\\\ \n \\hline \n $R_5$ & %f // %f\\\\ \n \\hline \n $R_6$ & %f // %f\\\\ \n \\hline \n $R_7$ & %f // %f\\\\ \n \\hline \n $R_8$ & %f // -\\\\ \n \\hline \n  %f \\\\ \n \\hline \n $I_b$ & %f \\\\ \n \\hline \n \\end{tabular} \n \\end{center} \n \\end{table}", Vm1, Im1, Vm2, Ib, Vm3, Im3, Im4, Vm5, Im5,Vm6, Im6, Vm7, Im7,Vm8, Ib);
+fprintf(minor, "\n \\begin{table}[H]\n \\footnotesize\n \\centering\n \\caption{Nodal Analysis results for t<0}\n \\label{tab:tables}\n \\begin{center}\n \\begin{tabular}{cccc}\n\\hline \n Node & Voltage (V) & R & Current(mA) \\\\ \n \\hline \n 1 & %f& $R_1$ & %f \\\\ \n \\hline \n 2& %f & $R_2$ & %f\\\\ \n \\hline \n 3 & %f& $R_3$ & %f \\\\ \n \\hline \n 4 & 0 &$R_4$ & %f \\\\ \n \\hline \n 5 &%f& $R_5$ & %f\\\\ \n \\hline \n 6 & %f & $R_6$ & %f\\\\ \n \\hline \n 7 & %f & $R_7$ & %f\\\\ \n \\hline \n 8 & %f & $I_b$ & %f \\\\ \n \\hline \\end{tabular} \n \\end{center} \n \\end{table}", Vm1, Im1, Vm2, Ib, Vm3, Im3, Im4, Vm5, Im5,Vm6, Im6, Vm7, Im7,Vm8, Ib);
 fclose(minor);
   
 Vx=V6-V8
@@ -141,9 +141,10 @@ filename='equal.tex';
 equal=fopen('equal.tex', 'w');
  fprintf(equal, "$ \\left(\\begin{array}{c} V_1 \\\\ V_2 \\\\ V_3 \\\\ V_5 \\\\ V_6 \\\\ V_7 \\\\ V_8 \\end{array}\\right)= \\left(\\begin{array}{c} %f \\\\ %f \\\\ %f \\\\ %f \\\\ %f \\\\ %f \\\\ %f \\end{array}\\right) $", Vx1, Vx2, Vx3, Vx5, Vx6, Vx7, Vx8);
 
-  
-fprintf(equal, "\n \\begin{table}[H]\n \\footnotesize\n \\centering\n \\caption{Nodal Analysis results}\n \\label{tab:tables}\n \\begin{center}\n \\begin{tabular}{ccc} \n & Voltage (V)/Current(mA) \\\\ \n \\hline \n\n\n \\hline \n $R_1$ & %f // %f \\\\ \n \\hline \n $R_2$ & %f // %f\\\\ \n \\hline \n $R_3$ & %f // %f \\\\ \n \\hline \n $R_4$ & -// %f \\\\ \n \\hline \n $R_5$ & %f // %f\\\\ \n \\hline \n $R_6$ & %f // %f\\\\ \n \\hline \n $R_7$ & %f // %f\\\\ \n \\hline \n $R_8$ & %f // -\\\\ \n \\hline \n  %f \\\\ \n \\hline \n $I_b$ & %f \\\\ \n \\hline \n \\end{tabular} \n \\end{center} \n \\end{table}", Vx1, Ix1,Vx2,Ib,Vx3,Ix3,Vx5,Ix5,Vx6,Ix6,Vx7,Ix7,Vx8, Ib);
-fprintf(equal, "\n $Ix=%f mA\n Req=%f \\Omega \n \\tau=%f$", double(Ix), double(Req),double(Tau));
+   
+fprintf(equal, "\n \\begin{table}[H]\n \\footnotesize\n \\centering\n \\caption{Nodal Analysis results}\n \\label{tab:tables}\n \\begin{center}\n \\begin{tabular}{cccc}\n\\hline \n Node & Voltage (V) & R & Current(mA) \\\\ \n \\hline \n 1 & %f& $R_1$ & %f \\\\ \n \\hline \n 2& %f & $R_2$ & %f\\\\ \n \\hline \n 3 & %f& $R_3$ & %f \\\\ \n \\hline \n 4 & 0 &$R_4$ & %f \\\\ \n \\hline \n5 &%f& $R_5$ & %f\\\\ \n \\hline \n 6 & %f & $R_6$ & %f\\\\ \n \\hline \n 7 & %f & $R_7$ & %f\\\\ \n \\hline \n 8 & %f & $I_b$ & %f \\\\ \n \\hline \n \\end{tabular} \n \\end{center} \n \\end{table}", Vx1, Ix1, Vx2, Ib, Vx3, Ix3, Ix4, Vx5, Ix5, Vx6, Ix6, Vx7, Ix7,Vx8, Ib);
+
+fprintf(equal, "\n $Ix=%f mA$  $Req=%f \\Omega$ $\\tau=%f$", double(Ix), double(Req),double(Tau));
 fclose(equal);
 
 
@@ -195,8 +196,8 @@ filename='major.tex';
 major=fopen('major.tex', 'w');
  fprintf(major, "$ \\left(\\begin{array}{c} V_1 \\\\ V_2 \\\\ V_3 \\\\ V_5 \\\\ V_6 \\\\ V_7 \\\\ V_8 \\end{array}\\right)= \\left(\\begin{array}{c} %f \\\\ %f \\\\ %f \\\\ %f \\\\ %f \\\\ %f \\\\ %f \\end{array}\\right) $", Vp1, Vp2, Vp3, Vp5, Vp6, Vp7, Vp8);
 
-  
-fprintf(major, "\n \\begin{table}[H]\n \\footnotesize\n \\centering\n \\caption{Nodal Analysis results}\n \\label{tab:tables}\n \\begin{center}\n \\begin{tabular}{ccc} \n & Voltage (V)/Current(mA) \\\\ \n \\hline \n\n\n \\hline \n $R_1$ & %f \\\\ \n \\hline \n $R_2$ & %f \\\\ \n \\hline \n $R_3$ & %f \\\\ \n \\hline \n $R_5$ & %f \\\\ \n \\hline \n $R_6$ & %f \\\\ \n \\hline \n $R_7$ & %f \\\\ \n \\hline \n $R_8$ & %f \\\\ \n \\hline \n  %f \\\\ \n \\hline \n \\\\ \n \\hline \n \\end{tabular} \n \\end{center} \n \\end{table}", Vp1, Vp2,Vp3,Vp5,Vp6,Vp7,Vp8);
+
+fprintf(major, "\n \\begin{table}[H]\n \\footnotesize\n \\centering\n \\caption{Nodal Analysis results for t>0}\n \\label{tab:tables}\n \\begin{center}\n \\begin{tabular}{ccc} \n & Voltage (V)\\\\ \n \\hline \n\n\n \\hline \n 1 & %f \\\\ \n \\hline \n 2 & %f \\\\ \n \\hline \n 3 & %f \\\\ \n \\hline \n 4 & 0 \\\\ \n \\hline \n 5 & %f \\\\ \n \\hline \n 6 & %f \\\\ \n \\hline \n 7 & %f \\\\ \n \\hline \n 8 &  %f \\\\ \n \\hline \n \\\\ \n \\hline \n \\end{tabular} \n \\end{center} \n \\end{table}", Vp1, Vp2,Vp3,Vp5,Vp6,Vp7,Vp8);
 fclose(major);
 
 
@@ -260,7 +261,6 @@ hold off;
 xlabel ("Log_{10}(f)[Hz]");
 ylabel ("Phase(degrees)");
 print (ht, "Phase.eps", "-depsc");
-
 
 hm = figure ();
 hold on;
