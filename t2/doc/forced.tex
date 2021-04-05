@@ -1,0 +1,38 @@
+\subsection{Forced solution}
+For t>0, the voltage source has the form $v_s(t)=sin(2 \pi  f t)$, where $f$ represents the frequency of the sinusoidal excitation. We expect that if we allow the system to evolve for a sufficient amount of time (enough that the natural solution dies out), the voltage at node 6 (the node near the capacitor) will also tend towards a sinusoidal signal. \\
+Since this circuit has a lot of components, it helps to use phasor notation, in which the voltages become the real part of complex vectors (called phasors), with information about the magnitude and phase of the signal. When we do nodal analysis we can ignore the time dependance and introduce it at the end, multiplying the phasors by the term $e^{2 \pi f t j}$, where $f$ is the forced frequency (imposed by the voltage source), taking finally the real combination of sine and cosine functions. \\
+Since we are using phasors, where voltages and currents are complex numbers, we also need to substitute the capacitor with its impedance (which is the resistance equivalent for phasors). The impedance of the capacitor can be expressed by $z_{c}=\frac{1}{2 \pi f C j}$. \\
+The new nodal equations become: \\
+\begin{equation}
+    V_{1}=V_{s}=1
+\end{equation}
+\begin{equation}
+  \frac{V_{2}-V_{1}}{R_{1}} +\frac{V_{2}-V_{3}}{R_{2}}+\frac{V_{2}-V_{5}}{R_{3}}=0 
+\end{equation}
+\begin{equation}
+  V_{5}-V_{2}+\frac{V_{3}-V_{2}}{R_{2} K_b}=0
+\end{equation}
+\begin{equation}
+   \frac{V_{5}}{R_{4}} + \frac{V_{5}-V_{6}}{R_{5}}+ \frac{V_{8}-V_{7}}{z_c} + \frac{V_{5}-V_{2}}{R_{3}}=0 
+\end{equation}
+\begin{equation}
+    \frac{V_{3}- V_{2}}{R_{2}} + \frac{V_{6}-V_{5}}{R_{5}} + \frac{V_{6}-V_{8}}{z_c} = 0
+\end{equation}
+\begin{equation}
+    V_{7}+ R_6 \left(\frac{V_{7}-V_{8}}{R_{7}}\right) = 0
+\end{equation}
+\begin{equation}
+  V_{8}-V_{5} + K_d \left(\frac{V_{8}-V_{7}}{R_{7}}\right) = 0
+\end{equation}
+The system of equations in matrix form: \\
+\left(\begin{array}{ccccccc} 
+1 & 0 & 0 & 0 & 0 & 0 & 0\\
+-\frac{1}{R_1} & \frac{1}{R_1}+\frac{1}{R_2}+\frac{1}{R_3} & -\frac{1}{R_2} & -\frac{1}{R_3}& 0 & 0 & 0 \\
+0 & -1-\frac{1}{R_2 K_b} & \frac{1}{R_2 K_b} & 1 & 0 & 0 & 0 \\
+0 & -\frac{1}{R_3} & 0 & \frac{1}{R_3} +\frac{1}{R_4}+\frac{1}{R_5} & -\frac{1}{R_5} & -\frac{1}{z_c} & \frac{1}{z_c} \\
+0 & -\frac{1}{R_2} & \frac{1}{R_2} & -\frac{1}{R_5} & \frac{1}{R_5} + \frac{1}{z_c} & 0 & -\frac{1}{z_c}\\
+0 & 0 & 0 & 0 & 0 & 1+\frac{R_6}{R_7} & -\frac{R_6}{R_7} \\
+0 & 0 & 0 & -1 & 0 & -\frac{K_d}{R_7} & 1 + \frac{K_d}{R_7} \\
+\end{array}\right)
+\left(\begin{array}{c} V_1 \\ V_2 \\ V_3 \\ V_5 \\ V_6 \\ V_7 \\ V_8 \end{array}\right) 
+= \left(\begin{array}{c} 1 \\ 0 \\ 0 \\ 0 \\0 \\ 0 \\0 \end{array}\right)
