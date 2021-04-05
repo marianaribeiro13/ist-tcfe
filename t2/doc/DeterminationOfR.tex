@@ -45,11 +45,11 @@ V_8\left( \frac{1}{R_7} - \frac{1}{K_d}\right) - \frac{V_7}{R_7} + \frac{V_5}{K_
 \end{equation}
 
 
-The next step is to solve the following system of equations (COMO FAÇO COM O VX????????????):
+The next step is to solve the following system of equations:
 \begin{equation}
-\left(\begin{array}{ccccccc} \frac{1}{R_1}+\frac{1}{R_2} +\frac{1}{R_3} & -\frac{1}{R_2} & -\frac{1}{R_3} & 0 & 0 & 0&0\\ -\frac{1}{R_2\times K_b}-1 & \frac{1}{R_2\times K_b} & 1 & 0 & 0 & 0 & 0\\ -\frac{1}{R_2}-\frac{1}{R_3} & \frac{1}{R_2} & \frac{1}{R_3}+\frac{1}{R_4} & 0& -\frac{1}{R_7} &\frac{1}{R_7} & 0\\ 0&0&0&1&0&-1&-1\\0&0&0&0&\frac{1}{R_6}+\frac{1}{R_7}&-\frac{1}{R_7}&0 \\ 0&0&\frac{1}{K_d}&0&-\frac{1}{R_7}&\frac{1}{R_7}-\frac{1}{K_d}&0\end{array}\right)
-\left(\begin{array}{c} V_2 \\ V_3 \\ V_5 \\ V_6 \\ V_7 \\ V_8 \\ V_x\end{array}\right) 
-= \left(\begin{array}{c} 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0\end{array}\right)
+\left(\begin{array}{cccccc} \frac{1}{R_1}+\frac{1}{R_2} +\frac{1}{R_3} & -\frac{1}{R_2} & -\frac{1}{R_3} & 0 & 0 & 0\\ -\frac{1}{R_2\times K_b}-1 & \frac{1}{R_2\times K_b} & 1 & 0 & 0 & 0 \\ -\frac{1}{R_2}-\frac{1}{R_3} & \frac{1}{R_2} & \frac{1}{R_3}+\frac{1}{R_4} & 0& -\frac{1}{R_7} &\frac{1}{R_7} \\ 0&0&0&1&0&-1\\0&0&0&0&\frac{1}{R_6}+\frac{1}{R_7}&-\frac{1}{R_7} \\ 0&0&\frac{1}{K_d}&0&-\frac{1}{R_7}&\frac{1}{R_7}-\frac{1}{K_d}\end{array}\right)
+\left(\begin{array}{c} V_2 \\ V_3 \\ V_5 \\ V_6 \\ V_7 \\ V_8 \end{array}\right) 
+= \left(\begin{array}{c} 0 \\ 0 \\ 0 \\ V_x \\ 0 \\ 0 \end{array}\right)
 \end{equation}
 
 Finally, we can calculate $I_x$ using equation (VER), the equivalent resistance $R_{eq}$ and the time constant, $\tau$: 
