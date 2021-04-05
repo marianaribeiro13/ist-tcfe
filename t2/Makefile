@@ -5,11 +5,16 @@
 # ------------------------------------------------------------
 
 all:
-	#make -C doc
-	#cp doc/report.pdf .
 	@python t2_datagen.py > data.txt
+	make -C mat
+	make -C doc
+	cp doc/report.pdf .
+
 clean:
 	@rm -f data.txt
+	make -C doc clean
+	make -C sim clean
+	make -C mat clean
 .PHONY: all clean
 
 
