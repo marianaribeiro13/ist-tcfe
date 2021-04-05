@@ -5,8 +5,6 @@
 * voltage source aqui como dc é 0 sobra só isto
 Vs 1 0 dc 0 ac 1 sin (0 1 1000 0 0 );
 .include ../mat/oc1.txt
-******************
-.ic v(6) = 8.830558  v(8) = 0
 .control
 set hcopypscolor=0
 set color0=white

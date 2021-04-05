@@ -1,6 +1,11 @@
 \subsection{Determination of Equivalent Resistor($R_{eq}$)}
 \label{ssec:R}
 Just as suggested, we made $V_s = 0$ and replaced the capacitor with a voltage source $V_x= V(6)-V(8)$, where V(6) and V(8) are the voltages in nodes 6 and 8 as obtained in section ~\ref{ssec:tl}. Then, we did once again the nodal analysis, with the purpose of obtaining values for $I_x$ and $V_x$, since we need this to get $R_{eq}$ for further analysis. To get this resistance, on the capacitor terminals, we need to use Thévenin's theorem. We are considering the capacitor, so, to get Thévenin's equivalent, we need to have an open circuit at the capacitor terminals. The rest of the circuit will be a voltage source $V_{Th}$ in series with a resistor of $R_{eq}=R_{Th}$ so the voltage drop across $R_{eq}$ is  $V_{Th}-0= V_{Th}$. In this way,  $V_{Th}$ will be equal to the open-circuit voltage, which is the voltage at the capacitor terminals. So to get Thévnin's equivalent circuit, we susbtitute the capacitor with a voltage source of voltage $V_{Th}$. This voltage source will have to have voltage $V_x$ to guartee the necessary continuity of voltage in the capacitor, from t\textless0.\\
+\begin{figure}[H] \centering
+\includegraphics[width=0.8\linewidth]{vx.pdf}
+\caption{Circuit for t=0}
+\label{fig:zim}
+\end{figure}
 Now, we only need 6 equations, because the GND node and node 1 become the same node.\\
 For node 2, we get:
 \begin{equation}

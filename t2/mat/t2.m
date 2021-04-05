@@ -69,7 +69,24 @@ V5 = vpa(ns.V5)
 V6 = vpa(ns.V6)
 V7 = vpa(ns.V7)
 V8 = vpa(ns.V8)
- 
+
+  Vm1=double(V1);
+ Vm2=double(V2);
+ Vm3=double(V3);
+ Vm5=double(V5);
+ Vm6=double(V6);
+ Vm7=double(V7);
+Vm8=double(V8);
+Ib=(Vm3-Vm2)/double(R2);
+
+filename='minor.txt';
+minor=fopen('minor.txt', 'w');
+ fprintf(minor, "$ \\left(\\begin{array}{c} V_1 \\\\ V_2 \\\\ V_3 \\\\ V_5 \\\\ V_6 \\\\ V_7 \\\\ V_8 \\end{array}\\right)= \\left(\\begin{array}{c} %f \\\\ %f \\\\ %f \\\\ %f \\\\ %f \\\\ %f \\\\ %f \\end{array}\\right) $", Vm1, Vm2, Vm3, Vm5, Vm6, Vm7, Vm8);
+
+  
+fprintf(minor, "\n \\begin{table}[H]\n \\footnotesize\n \\centering\n \\caption{Nodal Analysis results}\n \\label{tab:tables}\n \\begin{center}\n \\begin{tabular}{ccc} \n & Voltage (V)/Current(mA) \\\\ \n \\hline \n\n\n \\hline \n $R_1$ & %f \\\\ \n \\hline \n $R_2$ & %f \\\\ \n \\hline \n $R_3$ & %f \\\\ \n \\hline \n $R_5$ & %f \\\\ \n \\hline \n $R_6$ & %f \\\\ \n \\hline \n $R_7$ & %f \\\\ \n \\hline \n $R_8$ & %f \\\\ \n \\hline \n  %f \\\\ \n \\hline \n $I_b$ & %f \\\\ \n \\hline \n \\end{tabular} \n \\end{center} \n \\end{table}", Vm1, Vm2,Vm3,Vm5,Vm6,Vm7,Vm8, Ib);
+fclose(minor);
+  
 Vx=V6-V8
 vx = double (Vx);
 filename='oc0.txt';
@@ -97,6 +114,27 @@ Ix=(V2x-V3x)/R2 + (V5x-V6x)/R5
 Req=-Vx/Ix
 Tau=Req*C/1000
 
+
+  Vx1=double(V1);
+ Vx2=double(V2x);
+ Vx3=double(V3x);
+ Vx5=double(V5x);
+ Vx6=double(V6x);
+ Vx7=double(V7x);
+Vx8=double(V8x);
+Ib=(Vx3-Vx2)/double(R2);
+
+filename='equal.tex';
+equal=fopen('equal.tex', 'w');
+ fprintf(equal, "$ \\left(\\begin{array}{c} V_1 \\\\ V_2 \\\\ V_3 \\\\ V_5 \\\\ V_6 \\\\ V_7 \\\\ V_8 \\end{array}\\right)= \\left(\\begin{array}{c} %f \\\\ %f \\\\ %f \\\\ %f \\\\ %f \\\\ %f \\\\ %f \\end{array}\\right) $", Vx1, Vx2, Vx3, Vx5, Vx6, Vx7, Vx8);
+
+  
+fprintf(equal, "\n \\begin{table}[H]\n \\footnotesize\n \\centering\n \\caption{Nodal Analysis results}\n \\label{tab:tables}\n \\begin{center}\n \\begin{tabular}{ccc} \n & Voltage (V)/Current(mA) \\\\ \n \\hline \n\n\n \\hline \n $R_1$ & %f \\\\ \n \\hline \n $R_2$ & %f \\\\ \n \\hline \n $R_3$ & %f \\\\ \n \\hline \n $R_5$ & %f \\\\ \n \\hline \n $R_6$ & %f \\\\ \n \\hline \n $R_7$ & %f \\\\ \n \\hline \n $R_8$ & %f \\\\ \n \\hline \n  %f \\\\ \n \\hline \n $I_b$ & %f \\\\ \n \\hline \n \\end{tabular} \n \\end{center} \n \\end{table}", Vx1, Vx2,Vx3,Vx5,Vx6,Vx7,Vx8, Ib);
+fprintf(equal, "\n $Ix=%f mA\n Req=%f \\Omega \n \\tau=%f$", double(Ix), double(Req),double(Tau));
+fclose(equal);
+
+
+  
 printf("\n\nNatural solution:\n");
 
 A=double(Vx)

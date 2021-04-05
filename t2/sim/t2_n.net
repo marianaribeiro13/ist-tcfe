@@ -8,7 +8,6 @@
 V1 1 0 dc 0;
 .include ../mat/oc1.txt
 ******************
-.ic v(6) = 8.830558  v(8) = 0
 .control
 
 set hcopypscolor=0
