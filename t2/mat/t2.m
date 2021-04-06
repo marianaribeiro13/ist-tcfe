@@ -47,7 +47,7 @@ Kdd =  E;
 
 filename='octave.txt';
 fp=fopen('octave.txt', 'w');
-fprintf(fp, " V1 1 0 dc %.11f; \n R1 1 2 %.11fk; \n R2 2 3 %.11fk; \n R3 2 5 %.11fk; \n R4 0 5 %.11fk; \n R5 5 6 %.11fk; \n R6 0 7 %.11fk; \n R7 9 8 %.11fk; \n G1 6 3 2 5 %.11fm; \n v2 7 9 dc; 0 \n H1 5 8 v2 %.11fk; \n", Vsd, R1d, R2d, R3d, R4d, R5d, R6d, R7d, Kbd, Kdd);
+fprintf(fp, " V1 1 0 dc %.11f; \n R1 2 1 %.11fk; \n R2 3 2 %.11fk; \n R3 2 5 %.11fk; \n R4 5 0 %.11fk; \n R5 6 5 %.11fk; \n R6 7 0 %.11fk; \n R7 8 9 %.11fk; \n G1 6 3 2 5 %.11fm; \n v2 7 9 dc 0;\n H1 5 8 v2 %.11fk; \n", Vsd, R1d, R2d, R3d, R4d, R5d, R6d, R7d, Kbd, Kdd);
 fclose(fp);
 
 
@@ -98,7 +98,7 @@ Vx=V6-V8
 vx = double (Vx);
 filename='oc0.txt';
 f0=fopen('oc0.txt', 'w');
-fprintf(f0, " V3 6 8 dc %.11f; \n R1 1 2 %.11fk; \n R2 2 3 %.11fk; \n R3 2 5 %.11fk; \n R4 0 5 %.11fk; \n R5 5 6 %.11fk; \n R6 0 7 %.11fk; \n R7 9 8 %.11fk; \n G1 6 3 2 5 %.11fm; \n v2 7 9 dc 0; \n H1 5 8 v2 %.11fk; \n", vx, R1d, R2d, R3d, R4d, R5d, R6d, R7d, Kbd, Kdd);
+fprintf(f0, " V3 6 8 dc %.11f; \n R1 1 2 %.11fk; \n R2 2 3 %.11fk; \n R3 2 5 %.11fk; \n R4 0 5 %.11fk; \n R5 6 5 %.11fk; \n R6 0 7 %.11fk; \n R7 9 8 %.11fk; \n G1 6 3 2 5 %.11fm; \n v2 7 9 dc 0; \n H1 5 8 v2 %.11fk; \n", vx, R1d, R2d, R3d, R4d, R5d, R6d, R7d, Kbd, Kdd);
 fclose(f0);
 
 syms V2x V3x V5x V6x V7x V8x;
@@ -122,7 +122,7 @@ Req=-Vx/Ix
 Tau=Req*C/1000
 
 
-  Vx1=double(V1);
+  Vx1=0;
  Vx2=double(V2x);
  Vx3=double(V3x);
  Vx5=double(V5x);

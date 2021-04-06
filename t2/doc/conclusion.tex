@@ -1,5 +1,7 @@
 \section{Conclusion}
 \label{sec:conclusion}
-
-In this laboratory assignment the objective of analysing the circuit has been achieved. \\
-The results obtained by \textit{octave} in both the nodal and mesh theoretical analysis matched each other. The simulation results matched the theoretical results. The reason for this perfect match is the fact that this is a straightforward circuit containing only linear components, so the theoretical and simulation models cannot differ. Of these three methods, nodal analysis was the most prone to error for its high number of equations (7) compared with mesh analysis (3). The simulation was simple and quite effective. With very few commands we got the same results as the lengthier theoretical analysis.
+In this laboratory assignment, the objective of analysing the RC circuit has been achieved. \\
+When looking at the tables of currents and voltages obtained by \textit{Octave} and \textit{ngspice} for the analysis of the circuit when t\textless 0 we can that they perfectly match, which is expected since all components considered are linear.\\
+In the analysis for t=0, just one voltage is different than 0, $V_6$, and both methods resulted in the same value for this voltage, and for the current that goes throught $R_5$. In the \textit{ngspice} simulation the rest of voltages, that were supposed to be zero (and were, in the table obtained by \textit{Octave}), are in fact values of very small order of magnitude being practically negligible, which checks out.\\
+In terms of all of the plots, the ones obtained by \textit{Octave} were a perfect match for the ones obtained in \textit{ngspice}.\\
+Only the magnitude plot regarding $V_6$ had any differences, when comparing both tools, since they seem to be mirrored. Also, in the magnitude plot in \textit{ngspice} for $V_c$ the value for low frequencies should have been 0, but was slightly higher.
