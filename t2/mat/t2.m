@@ -144,7 +144,7 @@ equal=fopen('equal.tex', 'w');
    
 fprintf(equal, "\n \\begin{table}[H]\n \\footnotesize\n \\centering\n \\caption{Nodal Analysis results}\n \\label{tab:tables}\n \\begin{center}\n \\begin{tabular}{cccc}\n\\hline \n Node & Voltage (V) & R & Current(mA) \\\\ \n \\hline \n 1 & %f& $R_1$ & %f \\\\ \n \\hline \n 2& %f & $R_2$ & %f\\\\ \n \\hline \n 3 & %f& $R_3$ & %f \\\\ \n \\hline \n 4 & 0 &$R_4$ & %f \\\\ \n \\hline \n5 &%f& $R_5$ & %f\\\\ \n \\hline \n 6 & %f & $R_6$ & %f\\\\ \n \\hline \n 7 & %f & $R_7$ & %f\\\\ \n \\hline \n 8 & %f & $I_b$ & %f \\\\ \n \\hline \n \\end{tabular} \n \\end{center} \n \\end{table}", Vx1, Ix1, Vx2, Ib, Vx3, Ix3, Ix4, Vx5, Ix5, Vx6, Ix6, Vx7, Ix7,Vx8, Ib);
 
-fprintf(equal, "\n $Ix=%f mA$  $Req=%f \\Omega$ $\\tau=%f$", double(Ix), double(Req),double(Tau));
+fprintf(equal, "\n $Ix=%f mA$  $Req=%f k\\Omega$ $\\tau=%f$", double(Ix), double(Req),double(Tau));
 fclose(equal);
 
 
@@ -249,10 +249,9 @@ V3f=double(V3p);
 V2f=double(V2p);
 V5f=double(V5p);
 V8f=double(V8p);
-f=logspace(-1,6,200);
-
+f=logspace(-1,6,100);
 T = 1./(1+i*2*pi*f*double(Tau));
-T6 = 1 ./(1+i*2*pi*f*double(Tau)) + V8f;
+T6 = 1./(1+i*2*pi*f*double(Tau)) +(V8f);
 
 ht = figure ();
 hold on;
@@ -264,6 +263,7 @@ xlabel ("Log_{10}(f)[Hz]");
 ylabel ("Phase(degrees)");
 print (ht, "Phase.eps", "-depsc");
 
+
 hm = figure ();
 hold on;
 plot (log10(f), mag2db(abs(T)), "g- ;Vc(f);");
@@ -274,11 +274,3 @@ xlabel ("Log_{10}(f)[Hz]");
 ylabel ("Magnitude(dB)");
 legend ('location', 'west');
 print (hm, "Magnitude.eps", "-depsc");
-
-numer = [0, 1];
-denom = [double(Tau), 1];
-sys = tf (numer, denom);
-figure
-
-bode(sys, f*2*pi);
-print ("RC_bode.png", "-dpng");
