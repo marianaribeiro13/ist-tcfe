@@ -164,7 +164,7 @@ xlabel ("t[ms]");
 ylabel ("v6n(t) [V]");
 print (hf, "natural.eps", "-depsc");
 C1=double(C);
-zc=1/(2*pi*1000*C*i)
+zc=1/(2*pi*1000*C*i);
 syms V1p V2p V3p V5p V6p V7p V8p;
 N1p= V1p==1;
 N2p= (V2p-V1p)/R1 + (V2p-V3p)/R2 + (V2p-V5p)/R3==0;
@@ -192,12 +192,15 @@ V1p = vpa(ns.V1p)
  Vp7=double(V7p);
 Vp8=double(V8p);
 
+V6ra =double(real(V6p));
+V6ima =double(imag (V6p));
+
 filename='major.tex';
 major=fopen('major.tex', 'w');
- fprintf(major, "$ \\left(\\begin{array}{c} V_1 \\\\ V_2 \\\\ V_3 \\\\ V_5 \\\\ V_6 \\\\ V_7 \\\\ V_8 \\end{array}\\right)= \\left(\\begin{array}{c} %f \\\\ %f \\\\ %f \\\\ %f \\\\ %f \\\\ %f \\\\ %f \\end{array}\\right) $", Vp1, Vp2, Vp3, Vp5, Vp6, Vp7, Vp8);
+fprintf(major, "$ \\left(\\begin{array}{c} V_1 \\\\ V_2 \\\\ V_3 \\\\ V_5 \\\\ V_6 \\\\ V_7 \\\\ V_8 \\end{array}\\right)= \\left(\\begin{array}{c} %f \\\\ %f \\\\ %f \\\\ %f \\\\ %f + %f i \\\\ %f \\\\ %f \\end{array}\\right) $", Vp1, Vp2, Vp3, Vp5, V6ra, V6ima, Vp7, Vp8);
 
 
-fprintf(major, "\n \\begin{table}[H]\n \\footnotesize\n \\centering\n \\caption{Nodal Analysis results for t>0}\n \\label{tab:tables}\n \\begin{center}\n \\begin{tabular}{ccc} \n & Voltage (V)\\\\ \n \\hline \n\n\n \\hline \n 1 & %f \\\\ \n \\hline \n 2 & %f \\\\ \n \\hline \n 3 & %f \\\\ \n \\hline \n 4 & 0 \\\\ \n \\hline \n 5 & %f \\\\ \n \\hline \n 6 & %f \\\\ \n \\hline \n 7 & %f \\\\ \n \\hline \n 8 &  %f \\\\ \n \\hline \n \\\\ \n \\hline \n \\end{tabular} \n \\end{center} \n \\end{table}", Vp1, Vp2,Vp3,Vp5,Vp6,Vp7,Vp8);
+fprintf(major, "\n \\begin{table}[H]\n \\footnotesize\n \\centering\n \\caption{Nodal Analysis results for t\\textgreater0}\n \\label{tab:tables}\n \\begin{center}\n \\begin{tabular}{ccc} \n & Voltage (V)\\\\ \n \\hline \n\n\n \\hline \n 1 & %f \\\\ \n \\hline \n 2 & %f \\\\ \n \\hline \n 3 & %f \\\\ \n \\hline \n 4 & 0 \\\\ \n \\hline \n 5 & %f \\\\ \n \\hline \n 6 & %f + %f i \\\\ \n \\hline \n 7 & %f \\\\ \n \\hline \n 8 &  %f \\\\ \n \\hline \n \\\\ \n  \\end{tabular} \n \\end{center} \n \\end{table}", Vp1, Vp2,Vp3,Vp5,V6ra, V6ima,Vp7,Vp8);
 fclose(major);
 
 
@@ -208,8 +211,7 @@ f1=fopen('oc1.txt', 'w');
 fprintf(f1, "R1 2 1 %.11fk; \n R2 2 3 %.11fk \n R3 2 5 %.11fk; \n R4 5 0 %.11fk; \n R5 6 5 %.11fk; \n R6 7 0 %.11fk; \n R7 9 8 %.11fk; \n G1 6 3 2 5 %.11fm; \n v2 7 9 dc 0; \n H1 5 8 v2 %.11fk; \n C1 6 8 %.11fuF;\n .ic v(6) = %f v(8) = %f;\n", R1d, R2d, R3d, R4d, R5d, R6d, R7d, Kbd, Kdd, Cd, V6xa, V8xa);
 fclose(f1);
 
-V6ra = real(V6p);
-V6ima = imag (V6p);
+
 
 V6r = double(V6ra);
 V6im = double (V6ima);
@@ -249,7 +251,7 @@ V5f=double(V5p);
 V8f=double(V8p);
 f=logspace(-1,6,200);
 
-T = 1 ./(1+i*2*pi*f*double(Tau));
+T = 1./(1+i*2*pi*f*double(Tau));
 T6 = 1 ./(1+i*2*pi*f*double(Tau)) + V8f;
 
 ht = figure ();
