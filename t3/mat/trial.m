@@ -1,23 +1,22 @@
 close all 
 clear all
-pkg load symbolic
 vT=25e-3;
-f=1e3;
+f=50;
 w=2*pi*f;
-RON=80
-R=5e3
-C=5e-6
+RON=80;
+R=1.5e3;
+C=2e-6;
 vON=0.65;
 
-t=linspace(0, 5e-3, 1000);
-A = 5;
-vS=A*cos(w*t);
+t=linspace(0, 0.2, 1000);
+A = 13.8;
+vS=A*sin(w*t);
 vO= zeros(1,length(t));
 for i=1:length(t)
-  if(vS(i) - vON >=0)
-    vO(i) = vS(i) - vON;
+  if(vS(i) - 2*vON >=0)
+    vO(i) = vS(i) - 2*vON;
   else
-    vO(i) = 0;
+    vO(i) = -vS(i) - 2*vON;
   endif 
 endfor
 
@@ -28,27 +27,10 @@ xlabel ("t[ms]")
 ylabel ("v_o[V]")
 print ("vo.eps", "-depsc");
 
-%envelope detector
-A=5
-t=linspace(0, 5e-3, 1000);
-f=1000;
-w=2*pi*f;
-vS = A * cos(w*t);
+%{envelope detector
 vOhr = zeros(1, length(t));
-vO = zeros(1, length(t));
-a= sym (A);
-c= sym (C);
-r= sym (R);
-W= sym (w);
-syms to;
-n=C*A*R*w*sin(w*to)==A*cos(w*to);
-tof=solve(n);
-  for i=1:2
-	  toff=tof(i);
-  if toff>=0
-    tOFF=double(toff)
-endif
-endfor
+tOFF=1
+%/w*atan(-1/(w*R*C))
 	 
 vOnexp = A*cos(w*tOFF)*exp(-(t-tOFF)/R/C);
 
@@ -68,7 +50,7 @@ endfor
     vO(i) = 0;
   endif 
 endfor
-  
+
 plot(t*1000, vOhr)
 hold
 T=1/f
@@ -87,7 +69,6 @@ title("Output voltage v_o(t)")
 xlabel ("t[ms]")
 legend("rectified","envelope")
 print ("venvlope.eps", "-depsc");
-
 
 
 
@@ -120,3 +101,4 @@ endfor
 vO=VO+vo;
 plot(t*1000, vo);
 print ("vrec.eps", "-depsc");
+ %}
