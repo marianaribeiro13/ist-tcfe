@@ -8,17 +8,17 @@ R=1.5e3;
 C=2e-6;
 vON=0.65;
 
-t=linspace(0, 0.2, 1000);
+t=linspace(0, 0.2, 10000);
 A = 13.8;
 vS=A*cos(w*t);
 vOhr= zeros(1,length(t));
 for i=1:length(t)
   if(vS(i) >= 2*vON)
     vOhr(i) = vS(i) - 2*vON;
-  elseif (vS(i)>0 || (abs(vS(i))<2*vON && vS(i)<0)) %%%%%%%%%%%FALTA ARRANJAR
-    vOhr(i) = -vS(i) + 2*vON;
-  else
+  elseif (vS(i)<= -2*vON)
     vOhr(i) = -vS(i) - 2*vON;
+  else
+    vOhr(i) = 0;
   endif 
 endfor
 
@@ -50,6 +50,7 @@ if t(i) < tOFF
 endfor
 
 plot(t*1000, vO)
+axis ([0 10])
 title("Output voltage v_o(t)")
 xlabel ("t[ms]")
 legend("rectified","envelope")
@@ -59,9 +60,12 @@ print ("venvlope.eps", "-depsc");
 
 %lpf response
 Is=1e-12;
-vlim =3*vON
-rd=2*vT/(Is*exp(3*vON/2/vT));
-vo =3*rd/(R+3*rd) *A* cos(w*t);
+vT=25e-3;
+vON=0.65;
+Vd = 12/20;
+vlim =20*vON;
+rd=vT/(Is*exp(Vd/vT))
+vo =20*rd/(R+20*rd) *A* cos(w*t);
 figure;
 title("Output voltage v_o(t)")
 xlabel ("t[ms]")
