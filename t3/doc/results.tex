@@ -1,0 +1,46 @@
+\section{Results}
+\label{sec: res}
+
+\subsection{Plots}
+The results obtained from the analysis in Section ~\ref{sec: sim} can be seen in Figure ~\ref{fig: rc1}.
+\begin{figure}[H] \centering
+\includegraphics[width=0.4\linewidth]{vospice50.eps}
+\caption{Voltage simulation plots over time: red - voltage in secondary winding; blue - envelope detector output voltage; yellow - voltage regulator output voltage; green - ripple}
+\label{fig:rc1}
+\end{figure}
+
+From Section ~\ref{sec: theo} we obtained one period of the waves, seen in Figures ~\ref{fig: vo} to ~\ref{fig: vofinal}. 
+
+\begin{figure}[H] \centering
+\includegraphics[width=0.4\linewidth]{vo.eps}
+\caption{Voltage in the secondary winding (red) and voltage in rectifier (cyan) over time}
+\label{fig:vo}
+\end{figure}
+
+\begin{figure}[H] \centering
+\includegraphics[width=0.4\linewidth]{venvlope.eps}
+\caption{Envelope detector output voltage (blue) and voltage in rectifier (cyan) over one period}
+\label{fig:voen}
+\end{figure}
+
+\begin{figure}[H] \centering
+\includegraphics[width=0.4\linewidth]{vregulator.eps}
+\caption{Voltage regulator output voltage over one period}
+\label{fig:voreg}
+\end{figure}
+
+\begin{figure}[H] \centering
+\includegraphics[width=0.4\linewidth]{vfinal.eps}
+\caption{Ripple over one period}
+\label{fig:vofinal}
+\end{figure}
+
+\subsection{Merit}
+To calculate the merit we used the following equation:
+\begin{equation}
+M = \frac{1}{cost(ripple(v_O) + average(v_O - 12) + 10^{-6})}
+\end{equation}
+The cost is the sum of the cost of the resistor (1 MU/k$\Omega$), the capacitor (1 MU/$\mu$F) and the diodes (0.1 MU/diode). Our total cost is 8.2 MU.\\
+The DC output level average was calculated using function average() in \textit{ngspice} and function mean() in \textit{octave}. The results were 11.99012V and 12.007V, respectively.\\
+The ripple was calculated using functions max() and min() in both \textit{ngspice} and \textit{octave}. The results were 0.35752V and 0.00036995V, respectively.\\
+The merit was only calculated for the \textit{ngspice} simulation and the result was 0.3319.
