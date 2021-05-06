@@ -1,0 +1,48 @@
+\section{Theoretical Analysis}
+\label{sec:theo}
+To make this analysis, we used the voltage obtained in equation ~\eqref{eq: vs}, as a source to mimic the voltage after passing through the transformer. 
+\subsection{Envelope Detector}
+To make the envelope detector, we used a full-wave bridge rectifier, where the diodes were approximated by voltage sources of voltage $V_{ON}=0.65$. The current would only pass through to the resistor and capacitor if $|V_S| \geq 2V_{ON}$, since there are two diodes polarized in each direction (if $V_S\geq 2V_{ON}$, it passes throught the forward-biased resistors and if $V_S \leq -2V_{ON}$, it passes through the backward biased ones). The rectified voltage through the resistor (and capacitor), $v_B$ and
+\begin{equation}
+    \begin{split}
+{v_B (t)} = \left\{\begin{array}{lll} \ v_S(t) -2V_{ON},  \quad \ \ \ \ \  if \ \  \ v_S(t) \geq 2V_{ON} \\ 
+ \ -v_S(t) -2V_{ON} , \quad \ \  if \ \ \ v_S(t) \leq -2V_{ON}\\
+ \ 0,\quad \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  if \ \  \ |v_S(t)|\textless 2V_{ON}\\
+ \end{array} \right.
+  \end{split}
+\end{equation}
+ We chose the resistor to have resistance $R=3k\Omega$ and the capacitor to have capacitance $C=3\mu F$ as well.\\
+ To calculate the time where the diodes turn off, we used
+ \begin{equation}
+     t_{OFF}=\frac{1}{\omega}\arctan\left(\frac{1}{\omega RC}\right)
+ \end{equation}
+ During the time where the diodes are off $V_S \textless 2V_{ON}$, the capacitor discharges through the resistor and the voltage is
+ \begin{equation}
+     v_E(t)=(Acos(\omega t_{OFF})-2V_{ON})e^{-\frac{t-t_{OFF}}{RC}}
+ \end{equation}
+ The output voltage after passing through this envelope, $v_O$, becomes
+ \begin{equation}
+    \begin{split}
+{v_O (t)} = \left\{\begin{array}{lll} \ v_B(t),  \quad \ \ \ \ \  if \ \  \ t \textless t_{OFF} \\ 
+ \ v_E(t) , \quad \ \ \ \ \  if \   \ \ t \textgreater t_{OFF}\ \ and \ \ v_E(t)\textgreater v_B(t)\\
+ \ v_B(t),\quad \ \ \  \ \  if \ \  \ t \textgreater t_{OFF} \ \ and v_E(t) \textless v_B(t)\\
+ \end{array} \right.
+  \end{split}
+\end{equation}
+This way the oscillations are reduced.
+\subsection{Voltage Regulator}
+To make the voltage regulator, the diodes were approximated using resistors. We used 18 diodes to be able to compare the results with the simulation. To calculate each resistance, we used 
+\begin{equation}
+ r_d=\frac{V_T}{I_se^{\frac{V_D}{\eta V_T}}}
+\end{equation}
+where $V_D=12/18 V$, ie the voltage divided by all the diodes. $I_S$ is the reverse saturated current of the diodes and we used $I_S=1 pA$, and we used the same $\eta$ as in the simulation: 1. $V_T$ is the thermal voltage, used 25mV, the value for 25\textdegree C. The resistor in Figure ~\ref{fig:oc2}, $R_D$ corresponds to $18r_d$, since they are connected in series and the input voltage is the one resulting from the envelope detector $v_O$.\\
+The output voltage from this circuit is 
+\begin{equation}
+    v_o(t)=\frac{R_D}{R+R_D}v_O(t)
+\end{equation}
+where R is the resistor from the envelope detector.
+This is only the AC part of the output.
+The total output of this converter then is
+\begin{equation}
+    v_{OUT}(t)=12+v_o(t)
+\end{equation}

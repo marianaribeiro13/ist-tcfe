@@ -65,19 +65,22 @@ Vd = 12/18;
 vlim =18*vON;
 rd=vT/(Is*exp(Vd/vT))
 vo= zeros(1,length(t));
+
+
+figure;
+%limit
+%for i=1:length(t)
+ % if vO(i) > vlim
+  %  vO(i) = vlim;
+ % elseif vO(i) < -vlim
+  %  vO(i) = -vlim;
+ % endif
+%endfor
+
 for i=1:length(t)
 vo(i) =18*rd/(R+18*rd) *vO(i);
 endfor
 
-figure;
-%limit
-for i=1:length(t)
-  if vO(i) > vlim
-    vO(i) = vlim;
-  elseif vO(i) < -vlim
-    vO(i) = -vlim;
-  endif
-endfor
   VO=12;
   vOr= zeros(1,length(t));
 for i=1:length(t)
