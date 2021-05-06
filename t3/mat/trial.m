@@ -22,10 +22,11 @@ for i=1:length(t)
 endfor
 
 figure
-plot(t*1000, vOhr)
-title("Output voltage v_o(t)")
+plot(t*1000, vS, "r-;vS;")
+hold on;
+plot(t*1000, vOhr, "c-;Rectified;")
 xlabel ("t[ms]")
-ylabel ("v_o[V]")
+ylabel ("v[V]")
 print ("vo.eps", "-depsc");
 
 %envelope detector
@@ -34,9 +35,8 @@ tOFF=atan(1/(w*R*C))/w
 vOnexp = (A*cos(w*tOFF)- 2*vON)*exp(-(t-tOFF)/(R*C));
 
 figure
-
-plot(t*1000, vOhr)
-hold
+plot(t*1000, vOhr, "c-; Rectified;")
+hold on;
 T=1/f
 for i=1:length(t)
 if t(i) < tOFF
@@ -48,30 +48,28 @@ if t(i) < tOFF
   endif
 endfor
 
-plot(t*1000, vO)
+plot(t*1000, vO, "b-;Envelope;")
+hold off;
 axis ([0 10])
-title("Output voltage v_o(t)")
 xlabel ("t[ms]")
-legend("rectified","envelope")
+ylabel ("v[V]")
+legend ('location', 'west');
 print ("venvlope.eps", "-depsc");
 
 
-
-%lpf response
+%voltage regulator
 Is=1e-12;
 vT=25e-3;
 vON=0.65;
-Vd = 12/20;
-vlim =20*vON;
+Vd = 12/18;
+vlim =18*vON;
 rd=vT/(Is*exp(Vd/vT))
 vo= zeros(1,length(t));
 for i=1:length(t)
-vo(i) =20*rd/(R+20*rd) *vO(i);
+vo(i) =18*rd/(R+18*rd) *vO(i);
 endfor
+
 figure;
-title("Output voltage v_o(t)")
-xlabel ("t[ms]")
-ylabel ("v_{lpf}[V]")
 %limit
 for i=1:length(t)
   if vO(i) > vlim
@@ -85,13 +83,32 @@ endfor
 for i=1:length(t)
 vOr(i)=VO+vo(i);
 endfor
-plot(t*1000, vOr);
+
+plot(t*1000, vOr, 'y');
 axis ([0 10])
-title("Output voltage v_o(t)")
 xlabel ("t[ms]")
+ylabel ("V[V]")
 print ("vregulator.eps", "-depsc");
-plot(t*1000, vo);
+
+plot(t*1000, vo, 'g');
 axis ([0 10])
-title("Output voltage v_o(t)")
 xlabel ("t[ms]")
+ylabel ("v[V]")
 print ("vfinal.eps", "-depsc");
+
+
+%DC output level
+t2 = linspace(0, 0.2, 50);
+aux= zeros(1,length(t2));
+for i=1:length(t2)
+  aux(i) = vOr(i);
+endfor
+
+vav = mean(aux, "a")
+
+
+%Ripple
+vmax = max(aux);
+vmin = min(aux);
+
+rip = vmax - vmin
