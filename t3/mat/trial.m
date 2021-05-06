@@ -62,10 +62,10 @@ print ("venvlope.eps", "-depsc");
 Is=1e-12;
 vT=25e-3;
 vON=0.65;
-Vd = 12/20;
-vlim =20*vON;
+Vd = 12/18;
+vlim =18*vON;
 rd=vT/(Is*exp(Vd/vT))
-vo =20*rd/(R+20*rd) *A* cos(w*t);
+vo =18*rd/(R+18*rd)*A*cos(w*t);
 figure;
 title("Output voltage v_o(t)")
 xlabel ("t[ms]")
@@ -78,7 +78,14 @@ for i=1:length(t)
     vO(i) = -vlim;
   endif
 endfor
-  VO=3*vON;
-vO=VO+vo;
-plot(t*1000, vo);
-print ("vrec.eps", "-depsc");
+VO=12;
+vOr=VO+vo;
+plot(t*1000, vOr);
+print ("vregulator.eps", "-depsc");
+
+
+vOf=vO+vo;
+
+plot(t*1000, vOf);
+axis ([0 10])
+print ("vfinal.eps", "-depsc");
