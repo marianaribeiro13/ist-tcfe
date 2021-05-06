@@ -57,7 +57,7 @@ set color4=violet
 set color5=rgb:3/8/0
 set color6=rgb:4/0/0
 .trans
-tran 1e-5 220e-3 20e-3 
+tran 1e-5 220e-3 20e-3
 plot  v(3)-v(1) v(4) v(5) v(5)-12
 hardcopy vospice50.ps v(1)-v(3) v(4) v(5) v(5)-12
 
