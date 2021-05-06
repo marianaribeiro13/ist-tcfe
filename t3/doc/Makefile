@@ -24,8 +24,6 @@ clean:
 	@rm -rf *.aux *.bbl *.blg *.glg *.glo *.gls *.ilg *.ist *.lof
 	@rm -rf *.log *.lot *.nlo *.nls *.out *.toc *~ *.*% ./*.pdf ./*.ps
 	@rm -rf *_tab.tex *_tabs.tex octave-workspace *.eps
-	@rm -f RC_bode.png
-	@rm -f octave.txt oc0.txt oc1.txt
 
 .PHONY: all clean ngspice octave
 

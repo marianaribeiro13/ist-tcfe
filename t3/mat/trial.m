@@ -3,13 +3,12 @@ clear all
 vT=25e-3;
 f=50;
 w=2*pi*f;
-RON=80;
-R=1.5e3;
-C=2e-6;
+R=3e3;
+C=3e-6;
 vON=0.65;
 
 t=linspace(0, 0.2, 10000);
-A = 13.8;
+A = 20;
 vS=A*cos(w*t);
 vOhr= zeros(1,length(t));
 for i=1:length(t)
