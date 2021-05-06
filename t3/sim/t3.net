@@ -1,7 +1,8 @@
+AC/DC converter
 .options savecurrents
 
 * input voltage source
-vs 1 2 sin(0 230 50)
+vs 1 2 sin(0 230 50 0 0 90)
 
 *supostamente torna a corrente em 2x a corrente em Vs
 Fds 2 1 vs 16.7
@@ -13,7 +14,7 @@ D2 0 3 Default
 D3 0 1 Default
 D4 1 4 Default
 C1 4 0 2u
-R2 4 5 1.5k
+R1 4 5 1.5k
 
 * positive limiter
 Dp1 5 7 Default
@@ -35,6 +36,7 @@ Dp16 21 22 Default
 Dp17 22 23 Default
 Dp18 23 0 Default
 
+
 .model Default D
 .op
 
@@ -44,9 +46,17 @@ Dp18 23 0 Default
 .end
 
 .control
-
-tran 1e-5 200e-3
-plot  v(3)-v(1) v(4) v(5) v(5)-12 
-hardcopy vospice50.ps v(1)-v(3) v(4) v(5) v(5)-12
+set hcopypscolor=0
+set color0=white
+set color1=black
+set color2=red
+set color3=blue
+set color4=violet
+set color5=rgb:3/8/0
+set color6=rgb:4/0/0
+.trans
+tran 1e-5 220e-3 20e-3 
+plot  v(3)-v(1) v(4) v(5) v(5)-12
+hardcopy vospice50.ps v(1)-v(3) v(4) v(5) v(5)-12 
 
 .endc
