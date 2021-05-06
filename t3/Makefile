@@ -14,6 +14,7 @@ clean:
 	make -C doc clean
 	make -C sim clean
 	make -C mat clean
+	@rm report.pdf
 .PHONY: all clean
 
 
