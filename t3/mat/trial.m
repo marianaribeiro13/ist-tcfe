@@ -64,7 +64,10 @@ vON=0.65;
 Vd = 12/20;
 vlim =20*vON;
 rd=vT/(Is*exp(Vd/vT))
-vo =20*rd/(R+20*rd) *A* cos(w*t);
+vo= zeros(1,length(t));
+for i=1:length(t)
+vo(i) =20*rd/(R+20*rd) *vO(i);
+endfor
 figure;
 title("Output voltage v_o(t)")
 xlabel ("t[ms]")
@@ -77,7 +80,18 @@ for i=1:length(t)
     vO(i) = -vlim;
   endif
 endfor
-  VO=3*vON;
-vO=VO+vo;
+  VO=12;
+  vOr= zeros(1,length(t));
+for i=1:length(t)
+vOr(i)=VO+vo(i);
+endfor
+plot(t*1000, vOr);
+axis ([0 10])
+title("Output voltage v_o(t)")
+xlabel ("t[ms]")
+print ("vregulator.eps", "-depsc");
 plot(t*1000, vo);
-print ("vrec.eps", "-depsc");
+axis ([0 10])
+title("Output voltage v_o(t)")
+xlabel ("t[ms]")
+print ("vfinal.eps", "-depsc");
