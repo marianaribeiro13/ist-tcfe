@@ -1,0 +1,59 @@
+Symbolic pkg v2.8.0: Python communication link active, SymPy v1.5.1.
+I1 = -0.23345
+I2 = -0.24467
+I3 =  0.99219
+
+Currents in resistors:
+IM1 = -0.23345
+IM2 = -0.24467
+IM3 = -0.011224
+IM4 = -1.2256
+IM5 = -1.2909
+IM6 =  0.99219
+IM7 =  0.99219
+
+Voltages in resistors:
+VM1 = -0.23953
+VM2 = -0.49834
+VM3 = -0.034777
+VM4 = -5.0286
+VM5 = -4.0503
+VM6 =  2.0040
+VM7 =  1.0303
+
+Dependent Sources Currents and Voltages:
+Ib = -0.24467
+Ic =  0.99219
+Vc =  8.0629
+Vb = -0.034777
+V1 =  5.2333
+V2 =  4.9938
+V3 =  4.4955
+V4 =  5.0286
+V5 =  9.0789
+V6 = -2.0040
+V7 = -3.0343
+
+Currents in resistors:
+IN1 = -0.23345
+IN2 = -0.24467
+IN3 = -0.011224
+IN4 = -1.2256
+IN5 = -1.2909
+IN6 =  0.99219
+IN7 =  0.99219
+
+Voltages in resistors:
+VN1 = -0.23953
+VN2 = -0.49834
+VN3 = -0.034777
+VN4 = -5.0286
+VN5 = -4.0503
+VN6 =  2.0040
+VN7 =  1.0303
+
+Dependent Sources Currents and Voltages:
+ICN =  0.99219
+IBN = -0.24467
+VBN = -0.034777
+VCN =  8.0629

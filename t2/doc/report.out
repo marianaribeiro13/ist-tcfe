@@ -1,0 +1,22 @@
+\BOOKMARK [1][-]{section.1}{1 Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{2 Theoretical analysis}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{2.1 Operating point analysis for t<0}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{2.2 Determination of Equivalent Resistor\(Req\)}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.3}{2.3 Natural Solution}{section.2}% 5
+\BOOKMARK [2][-]{subsection.2.4}{2.4 Forced solution}{section.2}% 6
+\BOOKMARK [2][-]{subsection.2.5}{2.5 Final Solution}{section.2}% 7
+\BOOKMARK [2][-]{subsection.2.6}{2.6 Frequency response}{section.2}% 8
+\BOOKMARK [1][-]{section.3}{3 Simulation}{}% 9
+\BOOKMARK [2][-]{subsection.3.1}{3.1 Operating Point Analysis for t<0}{section.3}% 10
+\BOOKMARK [2][-]{subsection.3.2}{3.2 Operating Point Analysis for t=0}{section.3}% 11
+\BOOKMARK [2][-]{subsection.3.3}{3.3 Transient Analysis for Natural Response}{section.3}% 12
+\BOOKMARK [2][-]{subsection.3.4}{3.4 Analysis of Total Response}{section.3}% 13
+\BOOKMARK [2][-]{subsection.3.5}{3.5 Frequency Analysis}{section.3}% 14
+\BOOKMARK [1][-]{section.4}{4 Results}{}% 15
+\BOOKMARK [2][-]{subsection.4.1}{4.1 Analysis for t<0}{section.4}% 16
+\BOOKMARK [2][-]{subsection.4.2}{4.2 Analysis for t=0}{section.4}% 17
+\BOOKMARK [2][-]{subsection.4.3}{4.3 t>0: Natural Response}{section.4}% 18
+\BOOKMARK [2][-]{subsection.4.4}{4.4 t>0: Forced Response}{section.4}% 19
+\BOOKMARK [2][-]{subsection.4.5}{4.5 t>0: Total Response}{section.4}% 20
+\BOOKMARK [2][-]{subsection.4.6}{4.6 Frequency Analysis}{section.4}% 21
+\BOOKMARK [1][-]{section.5}{5 Conclusion}{}% 22

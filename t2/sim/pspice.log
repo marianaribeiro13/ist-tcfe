@@ -1,0 +1,39 @@
+
+Circuit: * circuit simulation lab 2 t>0 forced
+
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+
+Initial Transient Solution
+--------------------------
+
+Node                                   Voltage
+----                                   -------
+1                                            0
+2                                            0
+3                                            0
+5                                            0
+6                                      8.83056
+7                                            0
+9                                            0
+8                                            0
+h1#branch                                    0
+v2#branch                                    0
+vs#branch                                    0
+
+
+No. of Data Rows : 1012
+
+The file "tot.ps" may be printed on a postscript printer.
+tot_FIG
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+
+No. of Data Rows : 701
+
+The file "mag.ps" may be printed on a postscript printer.
+mag_FIG
+
+The file "phs.ps" may be printed on a postscript printer.
+phs_FIG
+ngspice-31 done
