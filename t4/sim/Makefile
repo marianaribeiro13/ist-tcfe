@@ -1,4 +1,4 @@
-all: ngspice.log spice.log nspice.log pspice.log
+all: ngspice.log 
 	$(eval NGSFIGS=$(shell grep _FIG nspice.log| sed 's/_FIG//g' | sed ':a;N;$!ba;s/\n/ /g'))
 	$(eval NGSFIGPS=$(addsuffix .ps, $(NGSFIGS)))
 	$(foreach i, $(NGSFIGPS), ps2pdf $i;)
@@ -9,21 +9,11 @@ all: ngspice.log spice.log nspice.log pspice.log
 	$(eval NGSFIGP=$(addsuffix .ps, $(NGSFIG)))
 	$(foreach i, $(NGSFIGP), ps2pdf $i;)
 
-nspice.log:../sim/t2_n.net
-	ngspice -b $< -o $@
-
-spice.log: ../sim/t2_0.net
-	ngspice -b $< -o $@
-
-
-pspice.log: ../sim/t2_for.net
-	ngspice -b $< -o $@
-
-ngspice.log: ../sim/t2.net 
+ngspice.log: ../sim/t4.net 
 	ngspice -b $< -o $@ 
 
 
 clean:
-	@rm -f ngspice.log spice.log nspice.log pspice.log *.tex *.pdf *.ps *~
+	@rm -f ngspice.log *.tex *.pdf *.ps *~
 
 .PHONY: all clean
