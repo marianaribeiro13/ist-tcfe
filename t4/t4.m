@@ -1,15 +1,15 @@
 %gain stage
 
-VT=25e-3
-BFN=178.7
-VAFN=69.7
-RE1=100
-RC1=1000
-RB1=80000
-RB2=20000
-VBEON=0.7
-VCC=12
-RS=100
+VT=25e-3;
+BFN=178.7;
+VAFN=69.7;
+RE1=100;
+RC1=1000;
+RB1=80000;
+RB2=20000;
+VBEON=0.7;
+VCC=12;
+RS=100;
 
 RB=1/(1/RB1+1/RB2)
 VEQ=RB2/(RB1+RB2)*VCC
@@ -32,9 +32,11 @@ AV1simple = gm1*RC1/(1+gm1*RE1)
 RE1=0
 AV1 = RC1*(RE1-gm1*rpi1*ro1)/((ro1+RC1+RE1)*(RB+rpi1+RE1)+gm1*RE1*ro1*rpi1 - RE1^2)
 AV1simple = gm1*RC1/(1+gm1*RE1)
+  gain=-RC1*(gm1*rpi1*ro1)/((ro1+RC1)*(RB+rpi1))
 
 RE1=100
 
+  
 ZI1 = ((ro1+RC1+RE1)*(RB+rpi1+RE1)+gm1*RE1*ro1*rpi1 - RE1^2)/(ro1+RC1+RE1)
 
 ZX = ro1*((RB+rpi1)*RE1/(RB+rpi1+RE1))/(1/(1/ro1+1/(rpi1+RB)+1/RE1+gm1*rpi1/(rpi1+RB)))
@@ -58,9 +60,8 @@ gm2 = IC2/VT
 go2 = IC2/VAFP
 gpi2 = gm2/BFP
 ge2 = 1/RE2
-
+ 
 AV2 = gm2/(gm2+gpi2+go2+ge2)
-
 
 
 ZI2 = (gm2+gpi2+go2+ge2)/gpi2/(gpi2+go2+ge2)
