@@ -11,7 +11,7 @@ Vin in 0 0 ac 1.0 sin(0 10m 1k)
 Rin in in2 100
 
 * input coupling capacitor
-Ci in2 base 1m
+Ci in2 base 1.7m
 
 * bias circuit
 R1 vcc base 80k
@@ -23,7 +23,7 @@ Rc vcc coll 1k
 Re emit 0 100
 
 * bypass capacitor
-Cb emit 0 1m
+Cb emit 0 1.7m
 
 
 * output stage
@@ -31,7 +31,7 @@ Q2 0 coll emit2 BC557A
 Rout emit2 vcc 100
 
 * output coupling capacitor
-Co emit2 out 1m
+Co emit2 out 1.7m
 
 * load
 RL out 0 8
@@ -58,15 +58,21 @@ hardcopy vo1f.ps vdb(coll)
 
 plot vdb(out)
 plot vp(out)
-hardcopy vo2f.ps vdb(coll)
+meas ac v(out)_max MAX v(out)
+meas ac vdb(out)_max MAX vdb(out)  
+meas ac freq_at when vdb(out)=3.493458e+01
+meas ac freq_at2 when vdb(out)=3.493458e+01 fall=LAST
+hardcopy vo2f.ps vdb(out)
 
 *input impedance in kohm
 *print all
 
 plot abs(v(in2)[40]/vin#branch[40]/(-1000))
 print v(in2)[40]/vin#branch[40]/(-1000)
+hardcopy zin.ps abs(v(in2)[40]/vin#branch[40]/(-1000))
 
 *need a different setup to measure output impedance
+
 
 .endc 
 
