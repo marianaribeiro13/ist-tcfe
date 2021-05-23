@@ -61,9 +61,8 @@ echo vo1_FIG
 
 * frequency analysis
 ac dec 10 10 100MEG
-plot vdb(coll)
-plot vp(coll)
-hardcopy vo1f.ps vdb(coll)
+plot vdb(coll)-vdb(in2)
+hardcopy vo1f.ps vdb(coll)-vdb(in2)
 echo vo1f_FIG
 
 let gain=v(out)-v(in2)
