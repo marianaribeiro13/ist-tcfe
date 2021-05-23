@@ -36,10 +36,21 @@ Co emit2 out 1.7m
 * load
 RL out 0 8
 
-.op
-.end
-
 .control
+op
+echo "op_TAB"
+print all
+echo "op_END"
+
+
+set hcopypscolor=0
+set color0=white
+set color1=black
+set color2=red
+set color3=blue
+set color4=violet
+set color5=rgb:3/8/0
+set color6=rgb:4/0/0
 
 
 * time analysis
