@@ -1,20 +1,20 @@
 \section{Simulation}
-This circuit c
+The circuit used can be seen in Figure ~\ref{fig:circngspice}
 \subsection{Output Voltage Gain}
 To make the simulation, the transistors used were PHILIPS BJT'S MODEL BC557A PNP (output stage) and MODEL BC547A NPN (gain stage). \\
-The output voltage gain is equal to the ratio between the output voltage and the input voltage. The input voltage is given by the voltage at node in2 (since the resistor $R_{in}$ is apart of our model of the voltage source) so the gain is equal to v(out)/v(in2). In dB the gain becomes vdb(out)-vdb(in).
+The output voltage gain is equal to the ratio between the output voltage and the input voltage. The input voltage is given by the voltage at node in2 (since the resistor $R_{in}$ is a part of our model of the voltage source) so the gain is equal to v(out)/v(in2). In dB the gain becomes vdb(out)-vdb(in).
 \subsection{Bandwith}
 Now that we have the plot of the gain across frequencies between 10Hz and 100MHz we can measure the maximum gain, with function "meas ac $(v(out)-v(in2))_{max}$ MAX v(out)-v(in2)". The bandwidth is the difference between the upper and lower 3dB cut off frequencies, so we want to calculate the two frequencies where gain=$(vdb(out)-vdb(in2))_{max}$-3dB. 
 
 \subsection{Input and Output Voltages}
 The input impedance is given by the ratio of the voltage at node in2 and the current flowing through the voltage source vin. \\
-In order to calculate the output impedance, we set the voltage of the voltage source vin at 0V and to measure the current flowing through node out we used a dummy ac voltage source of amplitude 1V and frequency 1kHz (at this frequency the gain is stabilized). So the output impedance is given by the ratio of the voltage at node out and the current measured by the dummy. 
+In order to calculate the output impedance, we set the voltage of the voltage source vin at 0V and to measure the current flowing through node out we used an ac test voltage source of amplitude 1V and frequency 1kHz (at this frequency the gain is stabilized). So the output impedance is given by the ratio of the voltage at node out and the current measured by the test source. 
 
-\subsection{Influence of the capacitance of the coupling capacitors on the bandwidth}
-The value we chose for the capacitance of the capacitors Ci e Co was 1.7mF. When we increased the capacitance the bandwidth increased and the lower cut off frequency diminished. When we decreased the capacitance the bandwidth decreased also.
+\subsection{Influence and purpose of the capacitance of the coupling capacitors on the bandwidth}
+The value we chose for the capacitance of the capacitors Ci and Co was 1.7mF. When we increased the capacitance the bandwidth increased and the lower cut off frequency diminished. When we decreased the capacitance the bandwidth decreased also. These capacitors are used to block the effect of 0V DC of the source $V_s$, which wouldn't forwardly bias the transistors. 
 
-\subsection{Influence of the capacitance of the bypass capacitor on the gain}
-The value we chose for the capacitance of the capacitor Cb was 1.7mF. When we increased the capacitance the gain increased and when we decreased the capacitance the opposite happened.
+\subsection{Influence and purpose of the capacitance of the bypass capacitor on the gain}
+The value we chose for the capacitance of the capacitor Cb was 1.7mF. When we increased the capacitance the gain increased and when we decreased the capacitance the opposite happened. This capacitor is needed because the resistor $R_E$, while stabilising the temperature effect, reduces the gain. The bypass capacitor reduces the effect of $R_E$ on the gain.
 
 \subsection{Influence of the resistance of $R_C$ on the gain}
-The value we chose for $R_C$  was $1k\Omega$. When we increased the resistance while keeping it in the same order of magnitude, the gain decreased significantly. When we decreased the resistance the opposite occurs. We noticed that the influence of the resistance of $R_C$ on the gain was larger than the capacitance of the bypass capacitor on the gain.
+The value we chose for $R_C$  was $1k\Omega$. When we increased the resistance while keeping it in the same order of magnitude, the gain decreased significantly. When we decreased the resistance the opposite occurs. We noticed that the influence of the resistance of $R_C$ on the gain was larger than that of the capacitance of the bypass capacitor on the gain.
