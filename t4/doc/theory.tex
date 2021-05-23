@@ -1,7 +1,9 @@
 \section{Theoretical Analysis}
 \label{sec:octave}
+
 \subsection{Operating Point Analysis}
 The bias circuit-$R_{B1}$, $R_{B2}$ and Vcc ensures the first transistor is forward-biased, since the source $V_S$ can't guarantee that, as it has no DC component. We add the capacitor $C_1$ so the effect of the 0V (DC) doesn't affect the transistor, since it causes an open circuit.
+We need to define $g_{m1}=I_{C_1}/V_T$, with $V_T=25\times 10⁻3 V$ and $I_{C_1}=\beta_F(R_{B_2}/(R_{B_1}+R_{B_2})V_{cc} -V_{BEON})/(R_B+(1+\beta_F)R_{E_1})$, where $V_{BEON}=0.7 V$ $r_{\pi_1}=\beta_F/g_{m1}$ and $r_{o_1}=V_{AFN}/I_{c_1}$, where $V_{AFN}=69.7 V$.
 We also replaced the bias circuit with its Thévenin equivalent. Turning off the source Vcc, we get the equivalent resistance $R_B= \frac{1}{\frac{1}{R_{B1}}+\frac{1}{R_{B2}}}$ and since Vcc is in series with $R_B$, we get the equivalent voltage by voltage divider: $V_{eq}=V_{cc}\frac{R_{B2}}{R_{B1}+R_{B2}}$.
 We need $R_{E1}$ so it stabilizes the temperature effect on this circuit. We need $C_E$ so the gain losses due to $R_{E1}$ are attenuated.
 Since $R_{E1}$ and $C_E$ are in parallel with each other, we can also replace them by the equivalent impedance: $Z_{E_1}=\frac{1}{\frac{1}{R_{E_1}}+\frac{1}{Z_{C_E}}}$. For DC analysis, the capacitor is an open circuit, so $Z_{E_1}=R_{E_1}$.
@@ -15,7 +17,7 @@ R_B & 0 & R_E\\
 \left(\begin{array}{c} I_{B_1} \\ I_{C_1} \\ I_{E_1}  \end{array}\right) 
 = \left(\begin{array}{c} \frac{V_{eq}-V_{ON}}{R_B+(1+\beta_F)R_E}\\ 0 \\ -V_{BEON}-V_{eq}  \end{array}\right)
 \end{equation},
-where $\beta_F=178.7$ is the forward common emitter current gain and $V_{BEON}=0.7V$ is the voltage required for the transistor to be forward biased. \\
+where $\beta_F$ is the forward common emitter current gain and $V_{BEON}$ is the voltage required for the transistor to be forward biased. \\
 With the currents determined we can calculate the nodal voltages of this circuit:
 \begin{equation}
     V_1=V_{eq}
@@ -32,8 +34,7 @@ With the currents determined we can calculate the nodal voltages of this circuit
 \begin{equation}
     V_5= V_E=R_E I_{E_1},
 \end{equation}
-
-For the output stage the equation for the super mesh rearranged to get the current in the emitter of the second transistor, $I_{E_{os}}$,  is: 
+For the output stage, the equation of the super mesh rearranged to get the current in the emitter of the second transistor, $I_{E_{os}}$,  is: 
 \begin{equation}
 I_{E_2}=\frac{V_{CC}-V_{EBON}-V_I}{R_E}
 \end{equation}
