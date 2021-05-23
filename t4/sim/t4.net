@@ -57,6 +57,7 @@ set color6=rgb:4/0/0
 tran 1e-5 1e-2
 plot v(coll)
 hardcopy vo1.ps vdb(coll)
+echo vo1_FIG
 
 
 * frequency analysis
@@ -64,22 +65,24 @@ ac dec 10 10 100MEG
 plot vdb(coll)
 plot vp(coll)
 hardcopy vo1f.ps vdb(coll)
+echo vo1f_FIG
 
-
+let gain=v(out)-v(in2)
+let gaindB=vdb(out)-vdb(in2)
 plot vdb(out)-vdb(in2)
-meas ac v(out)_max MAX v(out)
-meas ac vdb(out)_max MAX vdb(out)  
-meas ac freq_at when vdb(out)=3.749140e+00
-meas ac freq_at2 when vdb(out)=3.79140e+00 fall=LAST
+meas ac gain_max MAX gain
+meas ac gaindB_max MAX gaindB
+meas ac freq_at when vdb(out)=3.630997e+01
+meas ac freq_at2 when vdb(out)=3.630997e+01 fall=LAST
 hardcopy vo2f.ps vdb(out)-vdb(in2)
-
+echo vo2f_FIG
 *input impedance in kohm
 *print all
 
 plot abs(v(in2)[40]/vin#branch[40]/(-1000))
 print v(in2)[40]/vin#branch[40]/(-1000)
 hardcopy zin.ps abs(v(in2)[40]/vin#branch[40]/(-1000))
-
+echo zin_FIG
 *need a different setup to measure output impedance
 
 
