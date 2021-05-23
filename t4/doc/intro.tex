@@ -1,0 +1,19 @@
+\section{Introduction}
+The purpose of this work is to reproduce an audio amplifier circuit, using a theoretical analysis and a simulation. The circuit consisted of a gain stage circuit and an output stage, a source $V_s$ of maximum voltage 10mV, a load of 8$\Omega$ and a supply voltage Vcc of 12V. Both stages used transistors, but while the gain space used a NPN transistor, the output stage used a PNP model.\\
+The voltage source is connected to the gain stage which in turn is connected in series to the output stage, which is also connected to Vcc.\\
+For the simulation, we used the circuit that can be seen in Figure \ref{fig:circngspice}
+\begin{figure}[H] \centering
+\includegraphics[width=0.8\linewidth]{ng.pdf}
+\caption{Simulation circuit}
+\label{fig:circngspice}
+\end{figure} 
+In theoretical analysis, to simulate the transistors, we used three resistors and one voltage controlled current source. The circuit used can be seen in Figure \ref{fig:circoc}
+
+\begin{figure}[H] \centering
+\includegraphics[width=0.8\linewidth]{theocircuit.pdf}
+\caption{Theoretical analysis circuit}
+\label{fig:circoc}
+\end{figure} 
+The comparison between the two methods can be seen in Section ~\ref{sec: res}.
+The values of each component used are $R_s=100\Omega$, $C_1=1.7 mF$, $R_{B_1}=80k\Omega$, $R_{B_2}=20k\Omega$, $R_C=1k\Omega$, $R_{E_1}=100\Omega$, $C_E=1.7 mF$, $R_{E_2}=100\Omega$, $C_{2}=1.7mF$.
+
