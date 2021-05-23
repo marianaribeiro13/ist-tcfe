@@ -89,16 +89,16 @@ so
 \begin{equation}\label{eq:zi}
 Z_I=\frac{(r_{o_1}+R_C+R_{E_1})(R_{BS}+r_{pi_1}+R_{E_1})-g_{m_1}r_{pi_1}R_{E_1}r_{o_1}-R_{E_1}^2}{R_{E_1}+R_C+r_{o_1}}
 \end{equation}
-To calculate the output impedance, we put a voltage test source between nodes 5 and GND of voltage $v_o$, and turn off $v_s$. The impedance here is $Z_o=\frac{v_o}{i_o}$, as seen by the test source. We considered the impedance of the rest of the circuit $Z_X$, we get that $Z_o=\frac{1}{\frac{1}{Z_X}+\frac{1}{R_C}}$.
-Since $R_{B||\pi}$, by voltage divider, $v_\pi=-\frac{r_{\pi}}{R_\pi +R_B}v_4$.
+To calculate the output impedance, we put a voltage test source between nodes 5(Figure 2) and GND of voltage $v_o$, and turn off $v_s$. The impedance here is $Z_o=\frac{v_o}{i_o}$, as seen by the test source. We considered the impedance of the rest of the circuit $Z_X$, so we get that $Z_o=\frac{1}{\frac{1}{Z_X}+\frac{1}{R_C}}$.
+Since $R_{B}||r_{\pi_1}$, by voltage divider, $v_\pi=-\frac{r_{\pi}}{R_\pi +R_B}v_4$.
 We know, by nodal analysis that 
 \begin{equation}
 \frac{v_4}{R_{\pi_1}+R_B}-g_{m_1}v_\pi+\frac{v_4}{R_{E_1}}+\frac{v_4}{r_0}-\frac{v_o}{r_o}=0
 \end{equation}
 And $Z_X=\frac{v_o}{\frac{v_o-v_4}{r_o}+g_{m_1}v_\pi}$.\\
-When $R_{E_1}=0$, the circuit seen by the test source is only $R_{C||o}$ and the current source. Therefore, the impedance seen by the test source $Z_0=R_{C||o}$
+When $R_{E_1}=0$, the circuit seen by the test source is only $R_{C}||r_{o_1}$ and the current source. Therefore, the impedance seen by the test source $Z_0=R_{C}||r_{o_1}$
 \subsection{Output Stage}
-In this part of the circuit, we can get the conductances for $R_{\pi_2}$, $R_{o_2}$ and $R_{E_2}$:
+In this part of the circuit, we can get the conductances for $r_{\pi_2}$, $r_{o_2}$ and $R_{E_2}$:
 \begin{equation}
     g_{\pi_2}=\frac{g_{m_2}}{\beta_F}
 \end{equation}
@@ -158,7 +158,7 @@ The total output impedance of the circuit is given by:
 \end{equation}
 Where 
 \begin{equation}
-    g_B=\frac{1}{\frac{1}{g_{\pi_2}}+Z_0}
+    g_B=\frac{1}{\frac{1}{g_{\pi_2}}+Z_{o_g}}
 \end{equation}
-
+with $Z_{o_g}$ the output impedance of the gain stage.
 
