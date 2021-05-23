@@ -117,6 +117,8 @@ endfor
 
 fig=figure();
 plot(log10(f),gain);
+xlabel ("Frequency[Hz]")
+ylabel ("vo/vi[dB]")
 print(fig, "gain.eps", "-depsc");
 %total
 gB = 1/(1/gpi2+ZO1)
