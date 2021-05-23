@@ -55,7 +55,13 @@ Now $\beta_F=227.3$.
 \begin{equation}
     I_{B_2}=I_{E_2}-I_{C_2}
 \end{equation}
+\begin{figure}[H] \centering
+\includegraphics[width=0.8\linewidth]{inc.pdf}
+\caption{Gain stage (left) and output stage (right) circuits for DC and incremental analysis}
+\label{fig:oc2}
+\end{figure} 
 \section{Incremental}
+Vcc is now off, since it only has a DC component.
 \subsection{Gain stage}
 If we turn off $V_S$, we can get an equivalent Thévenin resistance from $R_S$ and $R_B$, $R_{SB}=\frac{1}{\frac{1}{R_S}+\frac{1}{R_B}}$. Since $C_1$ is in series with $R_{SB}$, we can use their equivalent impedance $Z_1=R_{SB}+Z_{C_1}$. For AC analysis, the capacitor is in short circuit, so $Z_1=R_{SB}$.  The output voltage from this part of the circuit is $V_{o_1}=V_5-0$. Analysing the circuit by mesh nodes, we get that 
 \begin{equation}
@@ -126,6 +132,11 @@ The output impedance is given by:
 
 \subsection{Whole circuit}
 \subsection{Frequency Analysis}
+\begin{figure}[H] \centering
+\includegraphics[width=0.8\linewidth]{gain.pdf}
+\caption{Circuit for Frequency analysis}
+\label{fig:oc2}
+\end{figure} 
 Since Vcc is a DC source, it is not taken into account for this analysis.
 Since $R_{E1}=100 \Omega$ and $C_E$ are in parallel with each other, we can also replace them by the equivalent impedance: $Z_{E_1}=\frac{1}{\frac{1}{R_{E_1}}+\frac{1}{Z_{C_2}}}$.\\
 Since the load and $C_2$ are in series with each other, we can replace them with $Z_2=R_L+Z_{C_2}$. This set is in parallel with $Ro_2$, so we can replace this with its impedance: $Z_3=\frac{1}{\frac{1}{Z_2}+\frac{1}{Ro_2}}$. All of this is also in parallel with the resistor $R_{E_2}$, so the equivalent impedance for all these components is $Z_T=\frac{1}{\frac{1}{R_{E_2}}+\frac{1}{Z_3}}$.
