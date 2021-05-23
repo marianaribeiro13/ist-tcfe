@@ -33,7 +33,7 @@ With the currents determined we can calculate the nodal voltages of this circuit
 \begin{equation}
     V_5= V_E=R_E I_{E_1},
 \end{equation}
-For the output stage, the equation of the super mesh rearranged to get the current in the emitter of the second transistor, $I_{E_{os}}$,  is: 
+For the output stage, the equation of the super mesh rearranged to get the current in the emitter of the second transistor, $I_{E_{2}}$,  is: 
 \begin{equation}
 I_{E_2}=\frac{V_{CC}-V_{EBON}-V_I}{R_E}
 \end{equation}
@@ -60,13 +60,13 @@ Now $\beta_F=227.3$.
 \caption{Gain stage (left) and output stage (right) circuits for DC and incremental analysis}
 \label{fig:oc2}
 \end{figure} 
-\section{Incremental}
-Vcc is now off, since it only has a DC component.
+\section{Incremental Analysis}
+Vcc is now off, since it only has a DC component and this is an AC analysis.
 \subsection{Gain stage}
-If we turn off $V_S$, we can get an equivalent Thévenin resistance from $R_S$ and $R_B$, $R_{SB}=\frac{1}{\frac{1}{R_S}+\frac{1}{R_B}}$. Since $C_1$ is in series with $R_{SB}$, we can use their equivalent impedance $Z_1=R_{SB}+Z_{C_1}$. For AC analysis, the capacitor is in short circuit, so $Z_1=R_{SB}$.  The output voltage from this part of the circuit is $V_{o_1}=V_5-0$. Analysing the circuit by mesh nodes, we get that 
+If we turn off $V_S$, we can get an equivalent Thévenin resistance from $R_S$ and $R_B$, $R_{SB}=\frac{1}{\frac{1}{R_S}+\frac{1}{R_B}}$. Since $C_1$ is in series with $R_{SB}$, we can use their equivalent impedance $Z_1=R_{SB}+Z_{C_1}$. For AC analysis, the capacitor is in short circuit, so $Z_1=R_{SB}$.  The output voltage from this part of the circuit is $V_{o_1}=V_5-0$ (Figure 2). Analysing the circuit by mesh analysis, we get that 
 \begin{equation}
-\left(\begin{array}{ccccc} 1 & 0 & 0 \\ r_{o_1}+R_C+R_{E_1} & -R_{E_1} & -r_{o_1}\\
--R_{E_1} & R_{E_1}+r_{\pi_1}+R_{BS} & 0\\ 0 & g_{m_1} & 1
+\left(\begin{array}{ccc}  r_{o_1}+R_C+R_{E_1} & -R_{E_1} & -r_{o_1}\\
+-R_{E_1} & R_{E_1}+r_{\pi_1}+R_{BS} & 0\\ 0 & g_{m_1}r_{\pi_1} & 1
 \end{array}\right)
 \left(\begin{array}{c} I_{A_1} \\ I_{B_1} \\ I_{C_1}  \end{array}\right) 
 = \left(\begin{array}{c}  0 \\ v_i \\0 \end{array}\right)
