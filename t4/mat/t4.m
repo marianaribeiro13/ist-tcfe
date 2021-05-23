@@ -20,6 +20,13 @@ IE1=(1+BFN)*IB1
 VE1=RE1*IE1
 VO1=VCC-RC1*IC1
 VCE=VO1-VE1
+  
+%voltage nodes gain stage
+V1gs=VEQ
+V2gs=VEQ-RB*IB1
+V3gs=VO1
+V4gs=VCC
+V5gs=RE1*IE1
 
 
 gm1=IC1/VT
@@ -59,6 +66,15 @@ IE2 = (VCC-VEBON-VI2)/RE2
 IC2 = BFP/(BFP+1)*IE2
 VO2 = VCC - RE2*IE2
 
+%voltage nodes and currents output stage
+V1os=VI2
+V2os=VO2
+V3os=VCC
+IBos=IE2-IC2
+ICos=IC2  
+IEos=IE2
+
+  
 gm2 = IC2/VT
 go2 = IC2/VAFP
 gpi2 = gm2/BFP
@@ -96,7 +112,6 @@ Vout=V(5)*j*w*C3/(j*w*C3+1/RL);
 Voutr=abs(Vout);
 VIr=abs(VI);
 gain(i)=20*log10(abs(Vout/VI));
-
 endfor
 
 
