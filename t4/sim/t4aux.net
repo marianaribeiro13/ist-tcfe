@@ -49,6 +49,6 @@ plot abs(v(out)[40]/Vd#branch[40]/(-1000))
 print 1/abs(Vd#branch[40])/(1000)
 hardcopy zout.ps abs(v(out)[40]/Vd#branch[40]/(-1000))
 echo zout_FIG
-*need a different setup to measure output impedance
 
+quit
 .endc 

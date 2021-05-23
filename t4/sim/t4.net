@@ -32,7 +32,6 @@ Rout emit2 vcc 100
 
 * output coupling capacitor
 Co emit2 out 1.7m
-
 * load
 RL out 0 8
 
@@ -76,15 +75,13 @@ meas ac freq_at when vdb(out)=3.630997e+01
 meas ac freq_at2 when vdb(out)=3.630997e+01 fall=LAST
 hardcopy vo2f.ps vdb(out)-vdb(in2)
 echo vo2f_FIG
-*input impedance in kohm
-*print all
+
 
 plot abs(v(in2)[40]/vin#branch[40]/(-1000))
 print v(in2)[40]/vin#branch[40]/(-1000)
 hardcopy zin.ps abs(v(in2)[40]/vin#branch[40]/(-1000))
 echo zin_FIG
-*need a different setup to measure output impedance
 
-
+quit
 .endc 
 
