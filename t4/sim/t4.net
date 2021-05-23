@@ -66,14 +66,12 @@ plot vp(coll)
 hardcopy vo1f.ps vdb(coll)
 
 
-
-plot vdb(out)
-plot vp(out)
+plot vdb(out)-vdb(in2)
 meas ac v(out)_max MAX v(out)
 meas ac vdb(out)_max MAX vdb(out)  
-meas ac freq_at when vdb(out)=3.493458e+01
-meas ac freq_at2 when vdb(out)=3.493458e+01 fall=LAST
-hardcopy vo2f.ps vdb(out)
+meas ac freq_at when vdb(out)=3.749140e+00
+meas ac freq_at2 when vdb(out)=3.79140e+00 fall=LAST
+hardcopy vo2f.ps vdb(out)-vdb(in2)
 
 *input impedance in kohm
 *print all
