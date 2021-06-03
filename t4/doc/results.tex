@@ -1,0 +1,121 @@
+\section{Results}
+\label{sec:res}
+\subsection{Operating Point}
+\subsubsection{simulation}
+The results from the operating point analysis, using \textit{ngspice} from the simulation can be seen in the following table
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|l|r|}
+    \hline    
+    {\bf Name} & {\bf Value [A or V]} \\ \hline
+    \input{../sim/op_tab}
+  \end{tabular}
+  \caption{Operating point. A variable preceded by @ is of type {\em current}
+    and expressed in Ampere; other variables are of type {\it voltage} and expressed in
+    Volt.}
+  \label{tab:op}
+\end{table}
+\subsubsection{F.A.R check}
+To make sure the transistor in the gain stage (NPN) was on, we needed $V_{CE} > V_{BE}$, and we got $V_{CE}=3.0215627 V$ and $V_{BE}=0.7082887 V$, which is what we needed.
+The transistor in the output stage (PNP), to work, needed $V_{EC} > V_{EB}$, and we got $V_{EC}=4.708670V$ and $V_{EB}=0.814475V$, which is also what we needed.
+
+\subsubsection{theoretical analysis}
+The results of the operating point for theoretical analysis, from \textit{octave}
+were:
+\textbf{Currents}:
+\begin{equation}
+\left(\begin{array}{c} I_{B_1} \\ I_{C_1} \\ I_{E_1} \\I_{B_2} \\ I_{C_2} \\ I_{E_2} \end{array}\right) 
+= \left(\begin{array}{c} 0.05044 \\ 8.9429 \\ 8.99429 \\ 0.36106\\ 82.068 \\ 82.429 \end{array}\right)
+\end{equation}
+\textbf{Voltage}:
+Gain Stage:
+\begin{equation}
+\left(\begin{array}{c} V_1 \\ V_2\\ V_3 \\ V_4 \\ V_5 \end{array}\right) 
+= \left(\begin{array}{c} \\ 2.4000 \\ 1.5993\\ 3.0571 \\ 12.0000 \\0.89929 \end{array}\right)
+\end{equation}
+Output stage:
+\begin{equation}
+\left(\begin{array}{c} V_1 \\ V_2\\ V_3  \end{array}\right) 
+= \left(\begin{array}{c} 3.0571 \\ 3.7571 \\ 12.0000
+\end{array}\right)
+\end{equation}
+\subsection{Incremental analysis}
+We calculated the gain in theoretical analysis, obtaining, 
+
+
+\begin{table}[H]
+\footnotesize
+\centering
+\caption{Gains-\textit{octave}}
+\label{tab:bomba}
+\begin{center}
+\begin{tabular}{|c|c|c | c |} 
+\hline
+ & Gain-GainS & Gain-OutputS& Gain-Total\\
+ \hline
+  $R_{E_1}=100 \Omega$ & 9.5133 & 0.99195 & 250.02  \\
+ \hline
+  $R_{E_1}=0\Omega$ &262.79 & 0.99195 & --- \\
+ 
+ \hline
+\end{tabular}
+\end{center}
+\end{table}
+Impedances
+\begin{table}[H]
+\footnotesize
+\centering
+\caption{Impedances-\textit{octave}}
+\label{tab:bomba}
+\begin{center}
+\begin{tabular}{|c|c|c |} 
+\hline
+ & $Z_{in} (\Omega)$ &$ Z_{out} (\Omega)$\\
+ \hline
+ $ R_{E_1}=100 \Omega$ (Gain Stage) &  8064.1 & 995.20\\
+ \hline
+  $R_{E_1}=0\Omega$ (Gain Stage)& 484.43 & 886.28\\
+  \hline
+  Output Stage & 8598.9 & 0.30217\\
+  \hline
+  Total & 484.43 & 3.9820\\
+  \hline
+\end{tabular}
+\end{center}
+\end{table}
+The output impedance of the gain stage is $Z_0=886.28\Omega$. Since this is much larger than the resistance of the load, $8\Omega$, the voltage at the load would be very small, which goes against the point of an amplifier. In order to solve this we added an output stage circuit, which reduced the output impedance to $Z0=0.30217\Omega$. Now we can connect the output stage with the speaker while not deteriorating the amplified signal.\\
+In order to do this the last thing we must insure is that we can connect the gain and output stages, without loss of signal. For this to happen the input impedance of the output stage should be much larger than the output impedance in the gain stage. Since the input impedance of the output stage is $Z{I_2}=8598.9\Omega$ and the output impedance of the gain stage is $Z0= 886.28\Omega$ ($Z{I_2}$ is about 10 times bigger than $Z_0$) we can consider that the impedances are compatible and we can connect the two circuits without much signal loss.\\
+
+The input impedance from the \textit{ngspice} simmulation was $567.6802 \Omega$ and the output one was $10.06358\Omega$.
+
+\subsection{Frequency Response}
+The gain as function of frequency, calculated by theoretical analysis can be seen in the following plot:
+\begin{figure}[H] \centering
+\includegraphics[width=0.4\linewidth]{gain.eps}
+\caption{Voltage gain in decibels as a fuction of Frequency }
+\label{fig:vo}
+\end{figure}
+
+The gain was plotted , as a function of frequency, from the simulation, both in the gain stage and in the whole circuit.
+\begin{figure}[H] \centering
+  \includegraphics[width=0.6\linewidth]{vo1f.pdf}
+\caption{Voltage gain in gain stage in db as a function of frequency}
+\label{fig:rc1}
+\end{figure}
+\begin{figure}[H] \centering
+  \includegraphics[width=0.6\linewidth]{vo2f.pdf}
+\caption{Voltage gain in the load (whole circuit) in db as a function of frequency}
+\label{fig:rc1}
+\end{figure}
+The lower cutoff frequency was 33.50066 Hz and the higher one was 1.074982 MHz. The difference between then - the bandwidth- is 1074948.499 Hz.
+
+
+
+
+
+
+The merit of the amplifier is given by 
+\begin{equation}
+    Merit=\frac{Gain*Bandwidth}{CutoffFrequency*cost}
+\end{equation}
+The cost was 5201.51 M.U., which makes the merit 22.54.

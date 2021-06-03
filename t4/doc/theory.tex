@@ -2,10 +2,9 @@
 \label{sec:octave}
 
 \subsection{Operating Point Analysis}
-The bias circuit-$R_{B1}$, $R_{B2}$ and Vcc ensures the first transistor is forward-biased, since the source $V_S$ can't guarantee that, as it has no DC component. We add the capacitor $C_1$ so the effect of the 0V (DC) doesn't affect the transistor, since it causes an open circuit.
-We need to define $g_{m1}=I_{C_1}/V_T$, with $V_T=25\times 10⁻3 V$ and $I_{C_1}=\beta_F(R_{B_2}/(R_{B_1}+R_{B_2})V_{cc} -V_{BEON})/(R_B+(1+\beta_F)R_{E_1})$, where $V_{BEON}=0.7 V$ $r_{\pi_1}=\beta_F/g_{m1}$ and $r_{o_1}=V_{AFN}/I_{c_1}$, where $V_{AFN}=69.7 V$.
-We also replaced the bias circuit with its Thévenin equivalent. Turning off the source Vcc, we get the equivalent resistance $R_B= \frac{1}{\frac{1}{R_{B1}}+\frac{1}{R_{B2}}}$ and since Vcc is in series with $R_B$, we get the equivalent voltage by voltage divider: $V_{eq}=V_{cc}\frac{R_{B2}}{R_{B1}+R_{B2}}$.
-We need $R_{E1}$ so it stabilizes the temperature effect on this circuit. We need $C_E$ so the gain losses due to $R_{E1}$ are attenuated.
+The bias circuit-$R_{B1}$, $R_{B2}$ and Vcc- ensures the first transistor is forward-biased. The capacitor $C_1$ causes an open circuit.
+We need to define $g_{m1}=I_{C_1}/V_T$, with $V_T=25 \times 10^{-3} V$ and $I_{C_1}=\beta_F (R_{B_2}/(R_{B_1}+R_{B_2})V_{cc} -V_{BEON})/(R_B+(1+\beta_F)R_{E_1})$, where $V_{BEON}=0.7 V$ and $\beta_f=178.7$, $r_{\pi_1}=\beta_F/g_{m1}$ and $r_{o_1}=V_{AFN}/I_{c_1}$, where $V_{AFN}=69.7 V$.
+We also replaced the bias circuit with its Thévenin equivalent. Turning off the source Vcc, we get the equivalent resistance $R_B= \frac{1}{\frac{1}{R_{B1}}+\frac{1}{R_{B2}}}$ and since Vcc is in series with both RB1 and RB2, we get the equivalent voltage by voltage divider: $V_{eq}=V_{cc}\frac{R_{B2}}{R_{B1}+R_{B2}}$.
 Since $R_{E1}$ and $C_E$ are in parallel with each other, we can also replace them by the equivalent impedance: $Z_{E_1}=\frac{1}{\frac{1}{R_{E_1}}+\frac{1}{Z_{C_E}}}$. For DC analysis, the capacitor is an open circuit, so $Z_{E_1}=R_{E_1}$.
 
 We did operating point analysis using the mesh method, separating the gain stage of the circuit from the output stage. For the gain stage the system of equations is, since $I_{E_1}=I_{B_1}+I_{C_1}$ and $I_{C_1}=\beta_F I_{B_1}$:
@@ -34,7 +33,7 @@ With the currents determined we can calculate the nodal voltages of this circuit
 \begin{equation}
     V_5= V_E=R_E I_{E_1},
 \end{equation}
-For the output stage, the equation of the super mesh rearranged to get the current in the emitter of the second transistor, $I_{E_{os}}$,  is: 
+For the output stage, the equation of the super mesh rearranged to get the current in the emitter of the second transistor, $I_{E_{2}}$,  is: 
 \begin{equation}
 I_{E_2}=\frac{V_{CC}-V_{EBON}-V_I}{R_E}
 \end{equation}
@@ -61,13 +60,13 @@ Now $\beta_F=227.3$.
 \caption{Gain stage (left) and output stage (right) circuits for DC and incremental analysis}
 \label{fig:oc2}
 \end{figure} 
-\section{Incremental}
-Vcc is now off, since it only has a DC component.
+\section{Incremental Analysis}
+Vcc is now off, since it only has a DC component and this is an AC analysis.
 \subsection{Gain stage}
-If we turn off $V_S$, we can get an equivalent Thévenin resistance from $R_S$ and $R_B$, $R_{SB}=\frac{1}{\frac{1}{R_S}+\frac{1}{R_B}}$. Since $C_1$ is in series with $R_{SB}$, we can use their equivalent impedance $Z_1=R_{SB}+Z_{C_1}$. For AC analysis, the capacitor is in short circuit, so $Z_1=R_{SB}$.  The output voltage from this part of the circuit is $V_{o_1}=V_5-0$. Analysing the circuit by mesh nodes, we get that 
+If we turn off $V_S$, we can get an equivalent Thévenin resistance from $R_S$ and $R_B$, $R_{SB}=\frac{1}{\frac{1}{R_S}+\frac{1}{R_B}}$. Since $C_1$ is in series with $R_{SB}$, we can use their equivalent impedance $Z_1=R_{SB}+Z_{C_1}$. For AC analysis, the capacitor is in short circuit, so $Z_1=R_{SB}$.  The output voltage from this part of the circuit is $V_{o_1}=V_5-0$ (Figure 2). Analysing the circuit by mesh analysis, we get that 
 \begin{equation}
-\left(\begin{array}{ccccc} 1 & 0 & 0 \\ r_{o_1}+R_C+R_{E_1} & -R_{E_1} & -r_{o_1}\\
--R_{E_1} & R_{E_1}+r_{\pi_1}+R_{BS} & 0\\ 0 & g_{m_1} & 1
+\left(\begin{array}{ccc}  r_{o_1}+R_C+R_{E_1} & -R_{E_1} & -r_{o_1}\\
+-R_{E_1} & R_{E_1}+r_{\pi_1}+R_{BS} & 0\\ 0 & g_{m_1}r_{\pi_1} & 1
 \end{array}\right)
 \left(\begin{array}{c} I_{A_1} \\ I_{B_1} \\ I_{C_1}  \end{array}\right) 
 = \left(\begin{array}{c}  0 \\ v_i \\0 \end{array}\right)
@@ -90,16 +89,16 @@ so
 \begin{equation}\label{eq:zi}
 Z_I=\frac{(r_{o_1}+R_C+R_{E_1})(R_{BS}+r_{pi_1}+R_{E_1})-g_{m_1}r_{pi_1}R_{E_1}r_{o_1}-R_{E_1}^2}{R_{E_1}+R_C+r_{o_1}}
 \end{equation}
-To calculate the output impedance, we put a voltage test source between nodes 5 and GND of voltage $v_o$, and turn off $v_s$. The impedance here is $Z_o=\frac{v_o}{i_o}$, as seen by the test source. We considered the impedance of the rest of the circuit $Z_X$, we get that $Z_o=\frac{1}{\frac{1}{Z_X}+\frac{1}{R_C}}$.
-Since $R_{B||\pi}$, by voltage divider, $v_\pi=-\frac{r_{\pi}}{R_\pi +R_B}v_4$.
+To calculate the output impedance, we put a voltage test source between nodes 5(Figure 2) and GND of voltage $v_o$, and turn off $v_s$. The impedance here is $Z_o=\frac{v_o}{i_o}$, as seen by the test source. We considered the impedance of the rest of the circuit $Z_X$, so we get that $Z_o=\frac{1}{\frac{1}{Z_X}+\frac{1}{R_C}}$.
+Since $R_{B}||r_{\pi_1}$, by voltage divider, $v_\pi=-\frac{r_{\pi}}{R_\pi +R_B}v_4$.
 We know, by nodal analysis that 
 \begin{equation}
 \frac{v_4}{R_{\pi_1}+R_B}-g_{m_1}v_\pi+\frac{v_4}{R_{E_1}}+\frac{v_4}{r_0}-\frac{v_o}{r_o}=0
 \end{equation}
 And $Z_X=\frac{v_o}{\frac{v_o-v_4}{r_o}+g_{m_1}v_\pi}$.\\
-When $R_{E_1}=0$, the circuit seen by the test source is only $R_{C||o}$ and the current source. Therefore, the impedance seen by the test source $Z_0=R_{C||o}$
+When $R_{E_1}=0$, the circuit seen by the test source is only $R_{C}||r_{o_1}$ and the current source. Therefore, the impedance seen by the test source $Z_0=R_{C}||r_{o_1}$
 \subsection{Output Stage}
-In this part of the circuit, we can get the conductances for $R_{\pi_2}$, $R_{o_2}$ and $R_{E_2}$:
+In this part of the circuit, we can get the conductances for $r_{\pi_2}$, $r_{o_2}$ and $R_{E_2}$:
 \begin{equation}
     g_{\pi_2}=\frac{g_{m_2}}{\beta_F}
 \end{equation}
@@ -159,7 +158,7 @@ The total output impedance of the circuit is given by:
 \end{equation}
 Where 
 \begin{equation}
-    g_B=\frac{1}{\frac{1}{g_{\pi_2}}+Z_0}
+    g_B=\frac{1}{\frac{1}{g_{\pi_2}}+Z_{o_g}}
 \end{equation}
-
+with $Z_{o_g}$ the output impedance of the gain stage.
 
