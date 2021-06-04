@@ -53,26 +53,29 @@ Vcc vcc 0 5.0
 Vee vee 0 -5.0
 Vin in 0 0 ac 1.0 sin(0 10m 1k)
 
-X1 0 inv_in vcc vee out uA741
+X1 ninv_in inv_in vcc vee out uA741
 
-R13 in in2 1000
-R11 in in2 1000
-R12 in in2 1000
-C11 in2 inv_in 1uF
-C12 in2 inv_in 1uF
-C13 in2 inv_in 220nF
-*C14 in2 inv_in 220nF
-R2 inv_in out 10000
-*C2 inv_in out 1nF
 
-* load
-RL out 0 8
 
+C11 in ninv_in 1uF
+C12 in ninv_in 1uF
+C13 in ninv_in 1uF
+C14 in ninv_in 220nF
+C15 in ninv_in 220nF
+R11 ninv_in 0 1000
+R12 ninv_in 0 1000
+R31 inv_in 0 10000
+R32 inv_in 0 10000
+R33 inv_in 0 10000
+R41 inv_in a 100000
+R42 a b 100000
+R43 b out 100000
+R2 out out1 1000
+C2 out1 0 220nF 
 .op
 .end
 
 .control
-
 set hcopypscolor=0
 set color0=white
 set color1=black
@@ -82,25 +85,25 @@ set color4=violet
 set color5=rgb:3/8/0
 set color6=rgb:4/0/0
 
-* time analysis
 tran 1e-5 1e-2
-plot v(out)
+plot v(out1)
+
 
 
 * frequency analysis
 ac dec 10 10 100MEG
-plot abs(v(out))/v(in)
-plot vdb(out)
-let gain=-v(out)/v(in)
-let gaindB=vdb(out)-vdb(in)
-plot vdb(out)-vdb(in)
+let gain=v(out1)/v(in)
+let gaindB=vdb(out1)-vdb(in)
+plot vp(gain)
+plot gaindb
+let gaindB=vdb(out1)-vdb(in)
 meas ac gain_max MAX gain
 meas ac gaindB_max MAX gaindB
-meas ac freq_at when vdb(out)=2.650247e+01
-meas ac freq_at2 when vdb(out)=2.650247e+01 fall=LAST
-hardcopy vo1f.ps vp(out)
+meas ac freq_at when vdb(out)=3.513115e+01
+meas ac freq_at2 when vdb(out)=3.513115e+01 fall=LAST
+hardcopy vo1f.ps vp(gain)
 echo vo1f_FIG
-hardcopy vo2f.ps vdb(out)-vdb(in)
+hardcopy vo2f.ps gaindb
 echo vo2f_FIG
 
 
@@ -108,9 +111,8 @@ echo vo2f_FIG
 print abs(v(in))[20]
 print  vin#branch[20]
 print abs(v(in)[20]/vin#branch[20])
-hardcopy zin.ps abs(v(in)[20]/vin#branch[20])
-echo zin_FIG
 
 quit
 .endc 
+
 
