@@ -1,0 +1,13 @@
+\section{Simulation}
+The circuit used can be seen in Figure ~\ref{fig:circngspice}. To make this simulation we used one  741 OPAMP, three 1k$\Omega$ resistors, one 10k$\Omega$ resistor, two 1$\mu$F capacitors ans one 220nF capacitor. 
+\subsection{Output Voltage Gain}
+The output voltage gain is equal to the ratio between the output voltage and the input voltage. The input voltage is given by the voltage at node in ( so the gain is equal to v(out)/v(in2). In dB the gain becomes vdb(out)-vdb(in). We plotted the gain for frequencies between 10Hz and 100MHz. To measure the maximum gain we used the function "meas ac $(v(out)/vdb(in))_{max}$ MAX v(out)/v(in)".
+\subsection{Central Frequency}
+Now that we have the plot of the gain in dB across frequencies between 10Hz and 100MHz we can measure the maximum gain, with function "meas ac $(vdb(out)-vdb(in))_{max}$ MAX vdb(out)-vdb(in)". The central frequency, $F_c$, is given by:
+\begin{equation}
+F_c=\sqrt{f_lf_u}
+\end{equation}
+Where $f_l$ and $f_u$ are the lower and upper 3dB cut off frequencies. So, we want to calculate the two frequencies where gaindb=$(vdb(out)-vdb(in2))_{max}$-3dB. 
+\subsection{Input and Output Impedances}
+The input impedance is given by the ratio of the voltage at node in and the current flowing through the voltage source vin. \\
+In order to calculate the output impedance, we set the voltage of the voltage source vin at 0V and to measure the current flowing through node out we used an ac test voltage source of amplitude 1V and frequency 1kHz (the desired central frequency). So the output impedance is given by the ratio of the voltage of the test source and its current.
