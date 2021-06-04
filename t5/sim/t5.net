@@ -104,9 +104,11 @@ hardcopy vo2f.ps vdb(out)-vdb(in)
 echo vo2f_FIG
 
 
-*input impedance 
-print abs(v(in)[40]/vin#branch[40])
-hardcopy zin.ps abs(v(in)[40]/vin#branch[40])
+*input impedance
+print abs(v(in))[20]
+print  vin#branch[20]
+print abs(v(in)[20]/vin#branch[20])
+hardcopy zin.ps abs(v(in)[20]/vin#branch[20])
 echo zin_FIG
 
 quit

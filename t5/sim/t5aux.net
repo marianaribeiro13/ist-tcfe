@@ -88,9 +88,9 @@ print all
 
 * frequency analysis
 ac dec 10 10 100MEG
-plot 1/abs(Vd#branch[40])
-print 1/abs(Vd#branch[40])
-hardcopy zoutc.ps 1/abs(Vd#branch[40])
+plot 1/abs(Vd#branch[20])
+print 1/abs(Vd#branch[20])
+hardcopy zoutc.ps 1/abs(Vd#branch[20])
 echo zoutc_FIG
 
 quit
