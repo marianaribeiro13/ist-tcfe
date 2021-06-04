@@ -73,13 +73,12 @@ RL out 0 8
 
 .control
 
-print all
 
 * time analysis
 tran 1e-5 1e-2
 plot v(out)
-hardcopy vo1.ps vdb(out)
-
+hardcopy vo1f.ps vdb(out)
+echo vo1f_FIG
 
 * frequency analysis
 ac dec 10 10 100MEG
@@ -92,8 +91,13 @@ meas ac gain_max MAX gain
 meas ac gaindB_max MAX gaindB
 meas ac freq_at when vdb(out)=2.650247e+01
 meas ac freq_at2 when vdb(out)=2.650247e+01 fall=LAST
+hardcopy vo2f.ps vdb(out)-vdb(in2)
+echo vo2f_FIG
 
-*input impedance in kohm
+
+*input impedance 
 print abs(v(in)[40]/vin#branch[40])
+
+quit
 .endc 
 
