@@ -1,23 +1,11 @@
 \section{Introduction}
 \label{sec:intro}
 The purpose of this work is to implement an active BandPass Filter (BPF) using one 741 OPAMP, capacitors and resistors, using a theoretical analysis and a simulation. The expected specifications of BandPass filter are a central frequency of 1kHz and a gain at central frequency of 40dB.\\
-The circuit we constructed consisted of a High Pass filter stage, an amplification and a Low Pass filter stage. The High Pass filter stage has an AC voltage source $V_{in}$ of maximum voltage 10mV, a capacitor $C_1$ with capacitance 220nF and one resistor $R_1$ with 1k$\Omega$. The amplification is 
-
-
- The circuit consisted of a gain stage circuit and an output stage circuit, a source $V_s$ of maximum voltage 10mV, a load of 8$\Omega$ and a supply voltage Vcc of 12V. Both stages used transistors, but while the gain stage used a NPN transistor, the output stage used a PNP model.\\
-The voltage source is connected to the gain stage which in turn is connected in series to the output stage, which is also connected to Vcc.\\
-For the simulation, we used the circuit that can be seen in Figure \ref{fig:circngspice}
+The circuit we constructed consisted of a High Pass filter stage, an amplification stage and a Low Pass filter stage. The High Pass filter stage has an AC voltage source $V_{in}$ of maximum voltage 10mV, a capacitor $C_1$ with capacitance 220nF and one resistor $R_1$ with 1k$\Omega$. The amplification stage has one 741 OPAMP, three resistors with resistance of 10k$\Omega$ in parallel creating an equivalent resistor $R_3$ and three resistors with resistance of 100k$\Omega$ in series creating an equivalent resistor $R_4$. The Low Pass filter stage has two resistors in parallel of 1k$\Omega$ each, resulting in equivalent resistor $R_2$ and a capacitor $C_2$ with capacitance 220nF. The circuit used can be seen in figure~\ref{fig:circngspice}.
 \begin{figure}[H] \centering
-\includegraphics[width=0.8\linewidth]{ng.pdf}
-\caption{Simulation circuit}
+\includegraphics[width=0.8\linewidth]{ngspice.pdf}
+\caption{Circuit}
 \label{fig:circngspice}
 \end{figure} 
-In theoretical analysis, to simulate the transistors, we used three resistors and one voltage controlled current source. The circuit used can be seen in Figure \ref{fig:circoc}
 
-\begin{figure}[H] \centering
-\includegraphics[width=0.8\linewidth]{theocircuit.pdf}
-\caption{Theoretical analysis circuit}
-\label{fig:circoc}
-\end{figure} 
-The comparison between the two methods can be seen in Section ~\ref{sec:res}.
-The values of each component used are $R_s=100\Omega$, $C_1=1.7 mF$, $R_{B_1}=80k\Omega$, $R_{B_2}=20k\Omega$, $R_C=1k\Omega$, $R_{E_1}=100\Omega$, $C_E=1.7 mF$, $R_{E_2}=100\Omega$, $C_{2}=1.7mF$.
+This circuit was used in both simulation and theoretical analysis, the only difference between them was the model used for the OPAMP. In the theoretical analysis we assumed an ideal OPAMP and in the simulation we used the 741 OPAMP model. In section~\ref{sec:res} we compared the frequency response (gain and phase), the central frequency achieved and the input and output impedances. 
