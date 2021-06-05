@@ -1,6 +1,4 @@
 pkg load symbolic;
-%gain stage
-
 
 VIN=exp(j*pi/2);
 R1=1000;
@@ -19,10 +17,7 @@ Phase=arg(G(fc))
 
 Iin=-VIN/(R1+1/(2*pi*fc*j*C1));
 ZIN=-VIN/Iin
-  V2=VIN/(1/(2*pi*fc*C1))*(1/(1/R1+2*pi*j*fc*C1));
-  V5=(1+R4/R3)*V2;
-Iout=1/(2*pi*fc*j*C2)+(1-V5)/ZR2;
-Zout=1/Iout
+Zout=1/(1/ZR2+j*2*pi*fc*C2)
 
   
 %--------------------------------------------
