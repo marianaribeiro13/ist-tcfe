@@ -88,6 +88,13 @@ set color6=rgb:4/0/0
 
 print all
 
+* time analysis
+tran 1e-5 1e-2
+plot v(out)
+hardcopy vo1.ps v(out)
+
+print all
+
 * frequency analysis
 ac dec 10 10 100MEG
 print 1/Vd#branch[20]
