@@ -101,7 +101,6 @@ plot gaindb
 hardcopy vo2f.ps gaindb 
 echo vo2f_FIG
 
-
 *input impedance
 print v(in)[20]/-(vin#branch[20])
 
