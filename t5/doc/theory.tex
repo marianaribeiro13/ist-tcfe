@@ -1,2 +1,52 @@
 \section{Theoretical Analysis}
-To make the theoretical analysis, we used the ideal model of an OPAMP, 
+To make the theoretical analysis, we used the ideal model of an OPAMP, which means the current through the non-inverting terminal (+) is zero, and the gain obtained at its output is given by
+\begin{equation}
+Gain_{OPAMP}=1+\frac{R_4}{R_3}  
+\end{equation}
+where $R_3$ represents the resistance of that parallel of resistors, and $R_4$, the resistance of that series of resistors.
+\subsection{Output Voltage Gain}
+Because we know the gain from the previous equation, we have a relation between the voltage of its non-inverting terminal (+) and its output terminal, using the same nodes denominations as in the simmulation,
+\begin{equation}\label{eq:opam}
+  V(outamp)=(1+\frac{R_4}{R_3})V(ninvin)
+\end{equation}
+
+We know, from nodal analysis in node \textit{ninvin}, that
+\begin{equation}
+  \frac{V(ninvin)-V(in)}{Z_{C_1}}+\frac{V(nivin)}{R_1}=0
+\end{equation}
+since the current from the (+) input terminal of the OPAMP is zero and where  $Z_{C_1}=\frac{1}{2\pifC_1}$. We can rewrite this as
+\begin{equation}\label{eq:highf}
+  \frac{V(in)}{Z_{C_1}}\frac{1}{\frac{1}{R_1}+\frac{1}{Z_{C_1}}}=V(ninvin)
+\end{equation}
+We also know, by nodal analysis of node \textit{out},
+\begin{equation}
+  \frac{V(out)}{Z_{C2}}+\frac{V(out)-V(outamp)}{R2}=0
+\end{equation}
+where $R_2$ is the equivalent resistance of the parallel of resistors, and $Z_{C_2}=\frac{1}{2\pifC_2}$.\\
+We get, from this last nodal analysis
+\begin{equation}
+  V(out)R_2\frac{1}{Z_{C2}}+\frac{1}{R_2}=v(outamp)
+\end{equation}
+and substituting here V(outamp) from equation ~\ref{eq:opam}, we get
+\begin{equation}
+  V(out)(\frac{1}{Z_{C2}}+\frac{1}{R_2})=(1+\frac{R_4}{R_3})V(ninvin)
+\end{equation}
+and substituting here V(ninvin) from equation ~\ref{eq:highf}, we get
+\begin{equation}
+  \frac{V(out)}{V(in)}=\frac{1+\frac{R_4}{R_3}}{R_1 Z_{C_1}}\frac{1}{\frac{1}{R_1}+\frac{1}{Z_{C_1}}}\frac{1}{\frac{1}{Z_{C_2}}+\frac{1}{R_2}}
+\end{equation}
+We used this expression both to calculate the gain in the central frequency 1000 Hz and in the frequency response. The gain is given by the magnitude of this expression and the phase is given by its argument.
+\subsection{Impedances}
+To calculate the input impedance, since there is no current in the + terminal of the OPAMP, we can do mesh analysis in the mesh which includes the voltage source vin, with current $I_1$, and we get
+\begin{equation}
+  I_1 Z_{C_1}-Vin+I_1 R_1=0 \Leftrightarrow I_1=\frac{Vin}{Z_{C_1}+R_1}
+\end{equation}
+Since the input impedance is given by, we have
+\begin{equation}
+  Z_{in}=\frac{Vin}{I_1}\Leftrightarrow Z_{in}=Z_{C_1}+R_1
+\end{equation}
+
+To calculate the output impedance, we turn off the voltage source and use the knowledge that in an ideal OPAMP the output impedance is zero to note that the voltage at its output (\textit{outamp}) node is zero, so we get that at the output, the only impedances seen are from $R_2$ and $Z_{C_2}$, which means, since, they are in parallel with each other,
+\begin{equation}
+  Z_{out}=\frac{1}{\frac{1}{R_1}+\frac{1}{Z_{C_2}}
+\end{equation}
