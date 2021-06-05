@@ -65,6 +65,7 @@ R42 a b 100000
 R43 b outamp 100000
 R21 outamp out 1000
 R22 outamp out 1000
+
 C2 out 0 220nF 
 .op
 .end

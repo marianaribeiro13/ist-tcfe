@@ -5,7 +5,7 @@
 # ------------------------------------------------------------
 
 all:
-	#make -C mat
+	make -C mat
 	make -C sim
 	#make -C doc
 	#cp doc/report.pdf . 
@@ -13,7 +13,7 @@ all:
 clean:
 	#make -C doc clean
 	make -C sim clean
-	#make -C mat clean
+	make -C mat clean
 	#@rm report.pdf
 .PHONY: all clean
 

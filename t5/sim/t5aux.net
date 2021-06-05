@@ -51,7 +51,7 @@
 
 Vcc vcc 0 5.0
 Vee vee 0 -5.0
-Vin in 0 0 ac 1.0 sin(0 10m 1k)
+Vin in 0 0 
 
 X1 ninv_in inv_in vcc vee outamp uA741
 
@@ -69,9 +69,6 @@ C2 out 0 220nF
 
 *dummy source
 Vd out 0 0 ac 1.0 sin(0 1 100)
-
-* load
-
 .op
 .end
 
@@ -86,17 +83,14 @@ set color4=violet
 set color5=rgb:3/8/0
 set color6=rgb:4/0/0
 
-print all
 
 * time analysis
 tran 1e-5 1e-2
 plot v(out)
 hardcopy vo1.ps v(out)
 
-print all
-
 * frequency analysis
 ac dec 10 10 100MEG
-print 1/Vd#branch[20]
+print 1/-Vd#branch[20]
 quit
 .endc 
