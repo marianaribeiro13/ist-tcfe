@@ -17,11 +17,12 @@ fc=1000;
 Gain=20*log10(abs(G(fc)))
 Phase=arg(G(fc))
 
-  V2=VIN/(2*pi*j*C1)*1/(1/R1+2*pi*j*C1);
-Iin=(V2-VIN)/(2*pi*j*C1);
-ZIN=VIN/Iin
-
-%Iout=1-
+Iin=-VIN/(R1+1/(2*pi*fc*j*C1));
+ZIN=-VIN/Iin
+  V2=VIN/(1/(2*pi*fc*C1))*(1/(1/R1+2*pi*j*fc*C1));
+  V5=(1+R4/R3)*V2;
+Iout=1/(2*pi*fc*j*C2)+(1-V5)/ZR2;
+Zout=1/Iout
 
   
 %--------------------------------------------
