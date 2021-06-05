@@ -53,26 +53,22 @@ Vcc vcc 0 5.0
 Vee vee 0 -5.0
 Vin in 0 0 ac 1.0 sin(0 10m 1k)
 
-X1 ninv_in inv_in vcc vee out uA741
+X1 ninv_in inv_in vcc vee outamp uA741
 
-C11 in ninv_in 1uF
-C12 in ninv_in 1uF
-C13 in ninv_in 1uF
-C14 in ninv_in 220nF
-C15 in ninv_in 220nF
-R11 ninv_in 0 1000
-R12 ninv_in 0 1000
+C11 in ninv_in 220nF
+R1  ninv_in 0 1000
 R31 inv_in 0 10000
 R32 inv_in 0 10000
 R33 inv_in 0 10000
 R41 inv_in a 100000
 R42 a b 100000
-R43 b out 100000
-R2 out out1 1000
-C2 out1 0 220nF 
+R43 b outamp 100000
+R21 outamp out 1000
+R22 outamp out 1000
+C2 out 0 220nF 
 
 *dummy source
-Vd 0 out1 0 ac 1.0 sin(0 1 100)
+Vd out 0 0 ac 1.0 sin(0 1 100)
 
 * load
 
@@ -94,10 +90,6 @@ print all
 
 * frequency analysis
 ac dec 10 10 100MEG
-plot 1/abs(Vd#branch[20])
-print 1/abs(Vd#branch[20])
-hardcopy zoutc.ps 1/abs(Vd#branch[20])
-echo zoutc_FIG
-
+print 1/Vd#branch[20]
 quit
 .endc 
