@@ -1,6 +1,6 @@
 pkg load symbolic;
 
-VIN=exp(j*pi/2);
+VIN=10*10^(-3)*exp(j*pi/2);
 R1=1000;
 R2=1000;
 ZR2=1/(2/1000);
