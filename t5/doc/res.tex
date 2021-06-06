@@ -1,7 +1,9 @@
 \section{Results}
 \label{sec:res}
+\subsection{Output Voltage Gain}
+The output voltage gain at the central frequency of 1000Hz, from the theoretical analysis has 35.657 dB magnitude, with a phase of 0.021517 rad.
 \subsection{Frequency Response}
-The plots of the output voltage gain  are shown below.
+The plots of the output voltage gain as a function of frequency are shown below.
 \begin{figure}[H] \centering
 \includegraphics[width=0.4\linewidth]{vo2f.pdf}
 \caption{Voltage gain in decibels as a fuction of Frequency (Simulation)}
@@ -13,20 +15,67 @@ The plots of the output voltage gain  are shown below.
 \caption{Voltage gain in decibels as a fuction of Frequency (Theoretical Anlysis)}
 \label{fig:vot}
 \end{figure}
-
-The plots of the phase of the gain 
+As we can see, the plots are very similar.\\
+\\
+The plots of the phase of the gain are
 \begin{figure}[H] \centering
 \includegraphics[width=0.4\linewidth]{vo1f.pdf}
 \caption{Phase of the gain in radians (Simulation)}
-\label{fig:vos}
+\label{fig:vov}
 \end{figure}
 
 \begin{figure}[H] \centering
 \includegraphics[width=0.4\linewidth]{phase.eps}
 \caption{Phase of the gain in radians (Theoretical Anlysis)}
-\label{fig:vot}
+\label{fig:vow}
 \end{figure}
 
+From the ngspice simulation OPAMP model, this component has two internal capacitors, (2 poles). This causes a sudden shift in the phase of $\frac{\pi}{2}$ per pole, so it rises sharply $\pi$ radians. This explains the difference between this plot and the one from the theoretical analysis.
+
+\subsubsection{Central Frequency}
+The maximum gain magnitude from the simultation is 35.65074dB.
+We calculated the maximum gain-3dB = 32.65074 dB, to get the cutoff frequencies, and we got, from the simulation:\\
+Lower Cutoff Frequency:408.3079 Hz\\
+Upper Cutoff Frequency:2500.013 Hz\\
+This gives a Central Frequency of 1010.3341 Hz.\\
+The gain magnitude for the central frequency 1000Hz is 35.65074dB, which corresponds to 60.44711 (in linear units).
+We also calculated the cutoff frequencies from the octave analysis, both using the formulas:
+\begin{equation}
+Low cutoff frequency=\frac{1}{2 \pi R_1 C_1},
+\end{equation}
+and
+\begin{equation}
+Upper cutoff frequency=\frac{1}{2 \pi R_2 C_2},
+\end{equation}
+having gotten the results 723.43Hz for the low frequency and 1446.9Hz for the upper, with a central frequency of 1023.1 Hz.\\
+However, when we calculated the cutoff frequencies by intesecting  gain-3dB (gain= 35.657 dB) with the  gain plot (as we did in the simulation), we got the following results:\\
+Lower Cutoff Frequency:406.95 Hz\\
+Upper Cutoff Frequency:2572.1 Hz\\
+This gives a Central Frequency of 1023.1 Hz.\\
+These cutoff frequencies are much closer to the ones obtained by the simulation. However, the central frequency is not changed in both methods of theoretical analysis.
 
 
 \subsection{Input and Output Impedances}
+We want, ideally, to have a very large input impedance and a small output one.\\
+From the simulation, for the central frequency of 1000Hz, we get the following results:\\
+Input impedance: 999.9944 -723.526i $\Omega$\\
+Output impedance:341.3639-233.092i $\Omega$\\
+\\
+
+We also calcuated, for this same frequency, the impedances from the theoretical analysis:
+Input impedance:1000.00 -  723.43i $Omega$\\
+Output impedance:338.37 - 233.86i $Omega$\\
+\\
+As we can see, both impedances are very close.\\
+
+\subsection{Merit}
+The merit of the circuit is given by
+\begin{equation}
+  M=\frac{1}{cost(voltage gain deviation+ central frequency deviation+10^{-6})}
+\end{equation}
+So to get the merit for our simulation,\\
+Our central frequency deviation is 1010.3341-1000=10.3341Hz\\
+Our gain deviation, from the wanted $40dB=10^{(40/20)}=100$ is 100-60.44711=39.55289.\\
+The cost of the components of the circuit (capacitors and resistors aside from the OPAMP) is 0.22*2+10*3+1*3+100*3=333.44 M.U. The cost for the OPAMP is 13323.29204 M.U.\\
+The total cost is then 13656.73204 M.U.\\
+The merit then becomes $1.468\times 10^{-6}$.

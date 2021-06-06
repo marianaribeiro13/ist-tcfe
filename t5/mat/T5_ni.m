@@ -11,7 +11,7 @@ R4=100000*3;
 
 
 G=@(f) (1+R4/R3)*1/(1/R1+(j*2*pi*f*C1))*1/((2*pi*j*f*C2)+1/ZR2)/(1/(C1*2*pi*j*f)*ZR2);
-fc=1000;
+fc=1000
 Gain=20*log10(abs(G(fc)))
 Phase=arg(G(fc))
 
