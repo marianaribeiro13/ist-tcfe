@@ -90,7 +90,10 @@ ac dec 10 10 100MEG
 let gain=v(out)/v(in)
 let gaindB=vdb(out)-vdb(in)
 plot vp(gain)
-
+let gain1000db=vdb(out)[20]
+let gain1000=v(out)[20]/v(in)[20]
+print gain1000
+print gain1000db
 let gaindB=vdb(out)-vdb(in)
 meas ac gain_max MAX gain
 meas ac gaindB_max MAX gaindB

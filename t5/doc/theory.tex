@@ -14,7 +14,7 @@ We know, from nodal analysis in node \textit{ninvin}, that
 \begin{equation}
   \frac{V(ninvin)-V(in)}{Z_{C_1}}+\frac{V(nivin)}{R_1}=0
 \end{equation}
-since the current from the (+) input terminal of the OPAMP is zero and where  $Z_{C_1}=\frac{1}{2\pifC_1}$. We can rewrite this as
+since the current from the (+) input terminal of the OPAMP is zero and where  $Z_{C_1}=\frac{1}{2\pi f C_1}$. We can rewrite this as
 \begin{equation}\label{eq:highf}
   \frac{V(in)}{Z_{C_1}}\frac{1}{\frac{1}{R_1}+\frac{1}{Z_{C_1}}}=V(ninvin)
 \end{equation}
@@ -22,7 +22,7 @@ We also know, by nodal analysis of node \textit{out},
 \begin{equation}
   \frac{V(out)}{Z_{C2}}+\frac{V(out)-V(outamp)}{R2}=0
 \end{equation}
-where $R_2$ is the equivalent resistance of the parallel of resistors, and $Z_{C_2}=\frac{1}{2\pifC_2}$.\\
+where $R_2$ is the equivalent resistance of the parallel of resistors, and $Z_{C_2}=\frac{1}{2\pi f C_2}$.\\
 We get, from this last nodal analysis
 \begin{equation}
   V(out)R_2\frac{1}{Z_{C2}}+\frac{1}{R_2}=v(outamp)
@@ -48,6 +48,6 @@ Since the input impedance is given by, we have
 
 To calculate the output impedance, we turn off the voltage source and use the knowledge that in an ideal OPAMP the output impedance is zero to note that the voltage at its output (\textit{outamp}) node is zero, so we get that at the output, the only impedances seen are from $R_2$ and $Z_{C_2}$, which means, since, they are in parallel with each other,
 \begin{equation}
-  Z_{out}=\frac{1}{\frac{1}{R_1}+\frac{1}{Z_{C_2}}
+  Z_{out}=\frac{1}{\frac{1}{R_1}+\frac{1}{Z_{C_2}}}
 \end{equation}
 We calculated these impedances for the central frequency of 1kHz.
